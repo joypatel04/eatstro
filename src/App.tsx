@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 
-import Navigator from "./navigation";
+import Navigator from "~navigation";
 
 export default function App() {
   return (
