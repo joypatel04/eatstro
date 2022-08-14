@@ -1,5 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "~screens";
+import TabStack from "~/navigation/TabStack";
 
 const Stack = createStackNavigator();
 
@@ -7,8 +7,8 @@ const Navigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="AppStack"
-        component={Home}
+        name="MainTabStack"
+        component={TabStack}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

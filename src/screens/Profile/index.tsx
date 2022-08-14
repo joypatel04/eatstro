@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
-const Home = () => (
+const Profile = () => (
   <Container>
     <Title>🦄 We are excited to see what you build!</Title>
-    <SubTitle>Home Tab</SubTitle>
+    <SubTitle>Profile Tab</SubTitle>
   </Container>
 );
 
@@ -28,4 +28,4 @@ const SubTitle = styled.Text`
   margin-top: 20px;
 `;
 
-export default Home;
+export default Profile;
