@@ -18,8 +18,6 @@ const TabContainer = (props: BottomTabBarProps) => {
   const tabWidth = width / 5;
   const ratio = width / NAVIGATION_BOTTOM_TABS_HEIGHT;
 
-  console.log("tabWidth * 1.6", tabWidth * 1.6);
-
   const d = useMemo(() => {
     const fixShape = line<LineProp>()
       .x(({ x }) => x)
