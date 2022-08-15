@@ -6,7 +6,10 @@
     "paths": {
       "~/*": ["src/*"],
       "~navigation": ["src/navigation/index"],
-      "~screens": ["src/screens/index"]
+      "~screens": ["src/screens/index"],
+      "~constants": ["src/constants/index"],
+      "~components": ["src/components/index"],
+      "~assets": ["./assets/*"],
     }
   }
 }
