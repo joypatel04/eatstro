@@ -4,7 +4,7 @@ import { Canvas, Path, Skia } from "@shopify/react-native-skia";
 import { line, curveBasis } from "d3-shape";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import styled from "styled-components/native";
-import { NAVIGATION_BOTTOM_TABS_HEIGHT, TAB_SVG_SHAPE } from "~/constants";
+import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import TabBar from "../TabBar";
 
 interface LineProp {
@@ -59,7 +59,7 @@ const TabContainer = (props: BottomTabBarProps) => {
 
   return (
     <>
-      <Container>
+      <View>
         <Canvas
           style={{
             shadowOffset: { width: 0, height: 4 },
@@ -75,17 +75,13 @@ const TabContainer = (props: BottomTabBarProps) => {
         <View style={[StyleSheet.absoluteFill]}>
           <TabBar {...props} />
         </View>
-      </Container>
+      </View>
       {props?.insets?.bottom > 0 && <BottomSpace />}
     </>
   );
 };
 
 export default TabContainer;
-
-const Container = styled.View`
-  background-color: papayawhip;
-`;
 
 const BottomSpace = styled.View`
   height: 15px;

@@ -1,31 +1,21 @@
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "styled-components/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AnimatedAccordion, Header } from "~/components";
 
 const Home = () => (
-  <Container>
-    <Title>🦄 We are excited to see what you build!</Title>
-    <SubTitle>Home Tab</SubTitle>
-  </Container>
+  <SafeAreaView edges={["top"]}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Container>
+        <Header />
+        <AnimatedAccordion />
+      </Container>
+    </TouchableWithoutFeedback>
+  </SafeAreaView>
 );
 
 const Container = styled.View`
-  flex: 1;
-  background-color: papayawhip;
-  justify-content: center;
-  align-items: center;
   padding: 16px;
-`;
-
-const Title = styled.Text`
-  font-size: 40px;
-  font-weight: 500;
-  color: palevioletred;
-`;
-
-const SubTitle = styled.Text`
-  font-size: 32px;
-  font-weight: 500;
-  color: palevioletred;
-  margin-top: 20px;
 `;
 
 export default Home;
