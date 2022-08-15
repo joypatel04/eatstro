@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { TextInput, TextInputProps, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
-import { TextInput, TextInputProps } from "react-native";
 
 type InputProps = {
   inputProps: TextInputProps;
@@ -17,8 +17,18 @@ const Input = ({ ...inputProps }: InputProps) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    shadowColor: "rgba(34, 43, 50, 0.1)",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 1,
+    shadowRadius: 40,
+    elevation: 2,
+  },
+});
+
 const Container = styled.View`
-  min-width: 85%;
+  min-width: 83%;
   height: 56px;
   flex-direction: row;
   align-items: center;
@@ -26,11 +36,6 @@ const Container = styled.View`
   padding: 12px;
   border-radius: 16px;
   overflow: hidden;
-  shadow-color: rgba(34, 43, 50, 0.1);
-  shadow-offset: {width: 0, height: 4};
-  shadow-opacity: 1;
-  shadow-radius: 40;
-  elevation: 2;
 `;
 
 const CustomInput = styled(TextInput).attrs({

@@ -1,4 +1,5 @@
-import { Keyboard, View } from "react-native";
+import { useRef, useState } from "react";
+import { Keyboard, View, StyleSheet } from "react-native";
 import Animated, {
   FadeIn,
   Transition,
@@ -12,7 +13,6 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
-import { useRef, useState } from "react";
 
 type AnimatedAccordionProps = {};
 
@@ -60,15 +60,33 @@ const AnimatedAccordion = ({}: AnimatedAccordionProps) => {
   );
 
   return (
-    <Transitioning.View ref={ref} transition={transition}>
+    <Transitioning.View
+      ref={ref}
+      transition={transition}
+      style={{ marginBottom: 10 }}
+    >
       <Header entering={FadeIn.delay(200).duration(1000)}>
         <Input inputProps={{}} />
-        <FilterButton Icon={Icon} onPress={onPressHandler} />
+        <FilterButton
+          style={styles.filterButton}
+          Icon={Icon}
+          onPress={onPressHandler}
+        />
       </Header>
       {open && <FiltersSection>{/* $$$ Filter goes here  */}</FiltersSection>}
     </Transitioning.View>
   );
 };
+
+const styles = StyleSheet.create({
+  filterButton: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 2,
+  },
+});
 
 const Header = styled(AnimatedView)`
   /* width: 90%; */
@@ -88,11 +106,6 @@ const FilterButton = styled(AnimatedPressable)`
   background-color: #f16b59;
   justify-content: center;
   align-items: center;
-  shadow-color: #000;
-  shadow-offset: {width: 0, height: 4};
-  shadow-opacity: 0.1;
-  shadow-radius: 10;
-  elevation: 2;
   margin-left: 12px;
 `;
 

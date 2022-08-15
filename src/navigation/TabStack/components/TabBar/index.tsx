@@ -9,6 +9,7 @@ import HomeLogo from "./Icons/HomeLogo";
 import FavouriteLogo from "./Icons/FavouriteLogo";
 import OrderLogo from "./Icons/OrderLogo";
 import { useCallback } from "react";
+import { useMemo } from "react";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const onPress = (name: string) => {
