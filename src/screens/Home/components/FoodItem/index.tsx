@@ -1,9 +1,11 @@
 import { Image } from "react-native";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
+import Toast from "react-native-toast-message";
 import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
+import { useCallback } from "react";
 
 const FoodItem = ({ item }: { item: any }) => {
   const [assets] = useAssets([
@@ -18,6 +20,15 @@ const FoodItem = ({ item }: { item: any }) => {
   const HeartIcon = (
     <SvgUri width={16} height={16} uri={assets?.[4]?.uri || ""} />
   );
+
+  const onAddToCart = useCallback(() => {
+    // TO-DO: Figure out something on how to handle multiple add to cart, while a toast it already presented
+    Toast.show({
+      type: "success",
+      text1: "Added to Cart",
+    });
+  }, []);
+
   return (
     <Container>
       <TopSection>
@@ -29,7 +40,7 @@ const FoodItem = ({ item }: { item: any }) => {
           <FavouriteText>{item.favoriteCount}</FavouriteText>
           <FavouriteIcon Icon={HeartIcon} />
         </FavouriteContainer>
-        <AddButton Icon={AddIcon} />
+        <AddButton Icon={AddIcon} onPress={onAddToCart} />
       </TopSection>
       <Section>
         <DetailSection>
