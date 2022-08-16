@@ -13,10 +13,12 @@ import { SearchSection, Header, SearchSuggestions } from "~/components";
 import FoodItem from "./components/FoodItem";
 
 import { DATA } from "./data";
+import { useStore } from "~/store";
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
   const insets = useSafeAreaInsets();
+  const addToSuggestions = useStore((state) => state.addToSuggestions);
   const [searchValue, setSearchValue] = useState<string>("");
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
@@ -25,7 +27,20 @@ const Home = () => {
     setShowSuggestions(true);
   };
 
-  const onBlurSearch = () => {
+  const onCloseSuggestions = () => {
+    setSearchValue("");
+    setShowSuggestions(false);
+  };
+
+  const onSelectFromSuggestions = (value: string) => {
+    setSearchValue(value);
+    setShowSuggestions(false);
+  };
+
+  const onSubmitEditing = () => {
+    if (searchValue.length) {
+      addToSuggestions(searchValue);
+    }
     setShowSuggestions(false);
   };
 
@@ -38,44 +53,47 @@ const Home = () => {
 
   return (
     <>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <Container paddingTop={insets.top}>
-          <View
-            onLayout={({ nativeEvent }) => {
-              setTopHeaderHeight(nativeEvent?.layout?.height);
-            }}
-          >
-            <Header />
-            <SearchSection
-              value={searchValue}
-              onChangeText={setSearchValue}
-              onFocus={onFocusSearch}
-              onBlur={onBlurSearch}
-            />
-          </View>
-          <ListHeader>Search results for ...</ListHeader>
-          {Platform.OS === "ios" ? (
-            <FlashList
-              contentContainerStyle={listContainerStyle}
-              data={DATA}
-              // horizontal // Uncommenting flag will turn list into horizontally
-              showsVerticalScrollIndicator={false}
-              estimatedItemSize={200}
-              renderItem={({ item }) => <FoodItem item={item} />}
-            />
-          ) : (
-            <FlatList
-              contentContainerStyle={listContainerStyle}
-              data={DATA}
-              // horizontal // Uncommenting flag will turn list into horizontally
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => <FoodItem item={item} />}
-            />
-          )}
-        </Container>
-      </TouchableWithoutFeedback>
+      <Container paddingTop={insets.top}>
+        <View
+          onLayout={({ nativeEvent }) => {
+            setTopHeaderHeight(nativeEvent?.layout?.height);
+          }}
+        >
+          <Header />
+          <SearchSection
+            value={searchValue}
+            onChangeText={setSearchValue}
+            onFocus={onFocusSearch}
+            onSubmitEditing={onSubmitEditing}
+          />
+        </View>
+        <ListHeader>Search results for ...</ListHeader>
+        {Platform.OS === "ios" ? (
+          <FlashList
+            contentContainerStyle={listContainerStyle}
+            data={DATA}
+            // horizontal // Uncommenting flag will turn list into horizontally
+            showsVerticalScrollIndicator={false}
+            estimatedItemSize={200}
+            renderItem={({ item }) => <FoodItem item={item} />}
+          />
+        ) : (
+          <FlatList
+            contentContainerStyle={listContainerStyle}
+            data={DATA}
+            // horizontal // Uncommenting flag will turn list into horizontally
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => <FoodItem item={item} />}
+          />
+        )}
+      </Container>
       {showSuggestions && (
-        <SearchSuggestions insets={insets} headerHeight={headerHeight} />
+        <SearchSuggestions
+          onCloseSuggestions={onCloseSuggestions}
+          onSelectSuggestions={onSelectFromSuggestions}
+          insets={insets}
+          headerHeight={headerHeight}
+        />
       )}
     </>
   );

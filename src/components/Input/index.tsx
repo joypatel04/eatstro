@@ -42,6 +42,7 @@ const Container = styled.View`
 `;
 
 const CustomInput = styled(TextInput)`
+  min-width: 70%;
   padding-left: 8px;
   font-size: 16px;
   font-weight: 400;
