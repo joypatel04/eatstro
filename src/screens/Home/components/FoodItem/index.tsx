@@ -1,12 +1,11 @@
-import { Image } from "react-native";
+import { useCallback, useState } from "react";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
+import FastImage from "react-native-fast-image";
 import Toast from "react-native-toast-message";
 import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
-import { useCallback } from "react";
-import { useState } from "react";
 
 const FoodItem = ({ item }: { item: any }) => {
   const [favouriteCount, setFavouriteCount] = useState<number>(
@@ -95,6 +94,11 @@ const Container = styled.Pressable`
 const TopSection = styled.View`
   border-radius: 16px;
   overflow: hidden;
+`;
+
+const Image = styled(FastImage)`
+  width: auto;
+  height: 140px;
 `;
 
 const FavouriteContainer = styled.View`
