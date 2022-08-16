@@ -58,7 +58,7 @@ const Home = () => {
             <FlashList
               contentContainerStyle={listContainerStyle}
               data={DATA}
-              horizontal // Uncommenting flag will turn list into horizontally
+              // horizontal // Uncommenting flag will turn list into horizontally
               showsVerticalScrollIndicator={false}
               estimatedItemSize={200}
               renderItem={({ item }) => <FoodItem item={item} />}
