@@ -1,8 +1,9 @@
-import { View, Image } from "react-native";
+import { Image } from "react-native";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
 import { SvgUri } from "react-native-svg";
-import FavouriteLogo from "~/navigation/TabStack/components/TabBar/Icons/FavouriteLogo";
+import { Entypo } from "@expo/vector-icons";
+import { AnimatedPressable } from "~/components";
 
 const FoodItem = ({ item }: { item: any }) => {
   const [assets] = useAssets([
@@ -12,20 +13,24 @@ const FoodItem = ({ item }: { item: any }) => {
     require("assets/pepper-inactive.svg"),
     require("assets/heart.svg"),
   ]);
+
+  const AddIcon = <Entypo name="plus" size={24} color="white" />;
+  const HeartIcon = (
+    <SvgUri width={16} height={16} uri={assets?.[4]?.uri || ""} />
+  );
   return (
     <Container>
-      <View>
+      <TopSection>
         <Image
-          style={{ width: "auto", height: 140, borderRadius: 16 }}
+          style={{ width: "auto", height: 140 }}
           source={{ uri: item.photo }}
         />
         <FavouriteContainer>
           <FavouriteText>{item.favoriteCount}</FavouriteText>
-          <FavouriteIcon>
-            <SvgUri width={16} height={16} uri={assets?.[4]?.uri || ""} />
-          </FavouriteIcon>
+          <FavouriteIcon Icon={HeartIcon} />
         </FavouriteContainer>
-      </View>
+        <AddButton Icon={AddIcon} />
+      </TopSection>
       <Section>
         <DetailSection>
           <PrimaryText>{item.name}</PrimaryText>
@@ -61,6 +66,11 @@ const Container = styled.Pressable`
   margin-bottom: 12px;
 `;
 
+const TopSection = styled.View`
+  border-radius: 16px;
+  overflow: hidden;
+`;
+
 const FavouriteContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -78,13 +88,25 @@ const FavouriteText = styled.Text`
   margin-right: 8px;
 `;
 
-const FavouriteIcon = styled.Pressable`
+const FavouriteIcon = styled(AnimatedPressable)`
   width: 32px;
   height: 32px;
   border-radius: 16px;
   justify-content: center;
   align-items: center;
   background-color: white;
+`;
+
+const AddButton = styled(AnimatedPressable)`
+  width: 40px;
+  height: 40px;
+  background-color: #f16b59;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  border-top-left-radius: 25px;
 `;
 
 const Section = styled.View`

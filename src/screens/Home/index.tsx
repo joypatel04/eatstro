@@ -18,6 +18,7 @@ const Home = () => {
         <AnimatedAccordion />
         <FlashList
           data={DATA}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <FoodItem item={item} />}
           estimatedItemSize={200}
           ListHeaderComponent={
