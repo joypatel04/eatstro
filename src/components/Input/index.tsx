@@ -7,12 +7,20 @@ type InputProps = {
   inputProps: TextInputProps;
 };
 
-const Input = ({ ...inputProps }: InputProps) => {
+const Input = (props: TextInputProps) => {
   const [value, setValue] = useState<string | undefined>(undefined);
   return (
     <Container>
       <Feather name="search" size={24} color="#D1D1D1" />
-      <CustomInput value={value} onChangeText={setValue} {...inputProps} />
+      <CustomInput
+        value={value}
+        onChangeText={setValue}
+        placeholderTextColor="#222B32"
+        placeholder="Search something..."
+        maxLength={28}
+        returnKeyType="search"
+        {...props}
+      />
     </Container>
   );
 };
@@ -38,11 +46,7 @@ const Container = styled.View`
   overflow: hidden;
 `;
 
-const CustomInput = styled(TextInput).attrs({
-  placeholderTextColor: "#222B32",
-  placeholder: "Search something...",
-  maxLength: 28,
-})`
+const CustomInput = styled(TextInput)`
   padding-left: 8px;
   font-size: 16px;
   font-weight: 400;

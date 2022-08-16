@@ -1,8 +1,9 @@
-import { TouchableWithoutFeedback, Keyboard, Text } from "react-native";
+import { useState } from "react";
+import { TouchableWithoutFeedback, Keyboard, View } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
-import { AnimatedAccordion, Header } from "~/components";
+import { AnimatedAccordion, Header, SearchSuggestions } from "~/components";
 import FoodItem from "./components/FoodItem";
 
 import { DATA } from "./data";
@@ -10,25 +11,45 @@ import { DATA } from "./data";
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
   const insets = useSafeAreaInsets();
+  const [headerHeight, setTopHeaderHeight] = useState<number>(0);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <Container paddingTop={insets.top}>
-        <Header />
-        <AnimatedAccordion />
-        <FlashList
-          data={DATA}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => <FoodItem item={item} />}
-          estimatedItemSize={200}
-          ListHeaderComponent={
-            <>
-              <ListHeader>Search results for ...</ListHeader>
-            </>
-          }
-        />
-      </Container>
-    </TouchableWithoutFeedback>
+    <>
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <Container paddingTop={insets.top}>
+          <View
+            onLayout={({ nativeEvent }) => {
+              setTopHeaderHeight(nativeEvent?.layout?.height);
+            }}
+          >
+            <Header />
+            <AnimatedAccordion
+              onFocusSearch={() => {
+                setShowSuggestions(true);
+              }}
+              onBlurSearch={() => {
+                setShowSuggestions(false);
+              }}
+            />
+          </View>
+          <FlashList
+            data={DATA}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item }) => <FoodItem item={item} />}
+            estimatedItemSize={200}
+            ListHeaderComponent={
+              <>
+                <ListHeader>Search results for ...</ListHeader>
+              </>
+            }
+          />
+        </Container>
+      </TouchableWithoutFeedback>
+      {showSuggestions && (
+        <SearchSuggestions insets={insets} headerHeight={headerHeight} />
+      )}
+    </>
   );
 };
 

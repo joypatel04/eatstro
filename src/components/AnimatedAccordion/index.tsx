@@ -14,7 +14,10 @@ import styled from "styled-components/native";
 import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
 
-type AnimatedAccordionProps = {};
+type AnimatedAccordionProps = {
+  onFocusSearch: () => void;
+  onBlurSearch: () => void;
+};
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -26,7 +29,10 @@ const transition = (
   </Transition.Together>
 );
 
-const AnimatedAccordion = ({}: AnimatedAccordionProps) => {
+const AnimatedAccordion = ({
+  onFocusSearch,
+  onBlurSearch,
+}: AnimatedAccordionProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const ref = useRef<any>(null);
 
@@ -66,7 +72,7 @@ const AnimatedAccordion = ({}: AnimatedAccordionProps) => {
       style={{ marginBottom: 10 }}
     >
       <Header entering={FadeIn.delay(200).duration(1000)}>
-        <Input inputProps={{}} />
+        <Input onBlur={onBlurSearch} onFocus={onFocusSearch} />
         <FilterButton
           style={styles.filterButton}
           Icon={Icon}
