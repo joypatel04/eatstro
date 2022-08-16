@@ -6,8 +6,13 @@ import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
 import { useCallback } from "react";
+import { useState } from "react";
 
 const FoodItem = ({ item }: { item: any }) => {
+  const [favouriteCount, setFavouriteCount] = useState<number>(
+    item.favoriteCount
+  );
+
   const [assets] = useAssets([
     require("assets/paleo.svg"),
     require("assets/calorie-fire.svg"),
@@ -29,6 +34,16 @@ const FoodItem = ({ item }: { item: any }) => {
     });
   }, []);
 
+  const onAddToFavourite = useCallback(() => {
+    const randomNumber =
+      Math.ceil(Math.random() * 99) * (Math.round(Math.random()) ? 1 : -1);
+    if (favouriteCount + randomNumber < 0) {
+      setFavouriteCount(favouriteCount - randomNumber);
+      return;
+    }
+    setFavouriteCount(favouriteCount + randomNumber);
+  }, [favouriteCount]);
+
   return (
     <Container>
       <TopSection>
@@ -37,8 +52,8 @@ const FoodItem = ({ item }: { item: any }) => {
           source={{ uri: item.photo }}
         />
         <FavouriteContainer>
-          <FavouriteText>{item.favoriteCount}</FavouriteText>
-          <FavouriteIcon Icon={HeartIcon} />
+          <FavouriteText>{favouriteCount}</FavouriteText>
+          <FavouriteIcon Icon={HeartIcon} onPress={onAddToFavourite} />
         </FavouriteContainer>
         <AddButton Icon={AddIcon} onPress={onAddToCart} />
       </TopSection>
