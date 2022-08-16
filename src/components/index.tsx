@@ -1,13 +1,7 @@
 import AnimatedPressable from "./AnimatedPressable";
-import AnimatedAccordion from "./AnimatedAccordion";
 import Header from "./Header";
 import Input from "./Input";
+import SearchSection from "./SearchSection";
 import SearchSuggestions from "./SearchSuggestions";
 
-export {
-  AnimatedPressable,
-  AnimatedAccordion,
-  Input,
-  Header,
-  SearchSuggestions,
-};
+export { AnimatedPressable, SearchSection, Input, Header, SearchSuggestions };

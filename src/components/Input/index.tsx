@@ -7,23 +7,18 @@ type InputProps = {
   inputProps: TextInputProps;
 };
 
-const Input = (props: TextInputProps) => {
-  const [value, setValue] = useState<string | undefined>(undefined);
-  return (
-    <Container>
-      <Feather name="search" size={24} color="#D1D1D1" />
-      <CustomInput
-        value={value}
-        onChangeText={setValue}
-        placeholderTextColor="#222B32"
-        placeholder="Search something..."
-        maxLength={28}
-        returnKeyType="search"
-        {...props}
-      />
-    </Container>
-  );
-};
+const Input = (props: TextInputProps) => (
+  <Container>
+    <Feather name="search" size={24} color="#D1D1D1" />
+    <CustomInput
+      placeholderTextColor="#222B32"
+      placeholder="Search something..."
+      maxLength={28}
+      returnKeyType="search"
+      {...props}
+    />
+  </Container>
+);
 
 const styles = StyleSheet.create({
   container: {

@@ -1,18 +1,41 @@
 import { useState } from "react";
-import { TouchableWithoutFeedback, Keyboard, View } from "react-native";
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
+  FlatList,
+  Platform,
+} from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
-import { AnimatedAccordion, Header, SearchSuggestions } from "~/components";
+import { SearchSection, Header, SearchSuggestions } from "~/components";
 import FoodItem from "./components/FoodItem";
 
 import { DATA } from "./data";
+import { useMemo } from "react";
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
   const insets = useSafeAreaInsets();
+  const [searchValue, setSearchValue] = useState<string>("");
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+
+  const onFocusSearch = () => {
+    setShowSuggestions(true);
+  };
+
+  const onBlurSearch = () => {
+    setShowSuggestions(false);
+  };
+
+  const listContainerStyle = useMemo(
+    () => ({
+      paddingBottom: headerHeight + 52, // Value 52 is header height
+    }),
+    []
+  );
 
   return (
     <>
@@ -24,26 +47,32 @@ const Home = () => {
             }}
           >
             <Header />
-            <AnimatedAccordion
-              onFocusSearch={() => {
-                setShowSuggestions(true);
-              }}
-              onBlurSearch={() => {
-                setShowSuggestions(false);
-              }}
+            <SearchSection
+              value={searchValue}
+              onChangeText={setSearchValue}
+              onFocus={onFocusSearch}
+              onBlur={onBlurSearch}
             />
           </View>
-          <FlashList
-            data={DATA}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => <FoodItem item={item} />}
-            estimatedItemSize={200}
-            ListHeaderComponent={
-              <>
-                <ListHeader>Search results for ...</ListHeader>
-              </>
-            }
-          />
+          <ListHeader>Search results for ...</ListHeader>
+          {Platform.OS === "ios" ? (
+            <FlashList
+              contentContainerStyle={listContainerStyle}
+              data={DATA}
+              horizontal // Uncommenting flag will turn list into horizontally
+              showsVerticalScrollIndicator={false}
+              estimatedItemSize={200}
+              renderItem={({ item }) => <FoodItem item={item} />}
+            />
+          ) : (
+            <FlatList
+              contentContainerStyle={listContainerStyle}
+              data={DATA}
+              // horizontal // Uncommenting flag will turn list into horizontally
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item }) => <FoodItem item={item} />}
+            />
+          )}
         </Container>
       </TouchableWithoutFeedback>
       {showSuggestions && (

@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useWindowDimensions } from "react-native";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
 import FastImage from "react-native-fast-image";
@@ -6,8 +7,10 @@ import Toast from "react-native-toast-message";
 import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
+import { useMemo } from "react";
 
 const FoodItem = ({ item }: { item: any }) => {
+  const { width } = useWindowDimensions();
   const [favouriteCount, setFavouriteCount] = useState<number>(
     item.favoriteCount
   );
@@ -43,13 +46,17 @@ const FoodItem = ({ item }: { item: any }) => {
     setFavouriteCount(favouriteCount + randomNumber);
   }, [favouriteCount]);
 
+  const containerStyle = useMemo(
+    () => ({
+      width: width - 32, // Value 32 is total padding on both side.
+    }),
+    [width]
+  );
+
   return (
-    <Container>
+    <Container style={[containerStyle]}>
       <TopSection>
-        <Image
-          style={{ width: "auto", height: 140 }}
-          source={{ uri: item.photo }}
-        />
+        <Image source={{ uri: item.photo }} />
         <FavouriteContainer>
           <FavouriteText>{favouriteCount}</FavouriteText>
           <FavouriteIcon Icon={HeartIcon} onPress={onAddToFavourite} />
@@ -87,8 +94,10 @@ export default FoodItem;
 
 const Container = styled.Pressable`
   background-color: #fff;
+  height: 280px;
   border-radius: 16px;
   margin-bottom: 12px;
+  margin-right: 12px;
 `;
 
 const TopSection = styled.View`

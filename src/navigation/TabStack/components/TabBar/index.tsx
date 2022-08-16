@@ -8,8 +8,7 @@ import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import HomeLogo from "./Icons/HomeLogo";
 import FavouriteLogo from "./Icons/FavouriteLogo";
 import OrderLogo from "./Icons/OrderLogo";
-import { useCallback } from "react";
-import { useMemo } from "react";
+import CartLogo from "./Icons/CartLogo";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const onPress = (name: string) => {
@@ -47,6 +46,8 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
             color={state.index === 3 ? "#F16B59" : "#D1D1D1"}
           />
         );
+      case "Cart":
+        return <CartLogo width={24} height={24} color={"#FFF"} />;
       case "Profile":
         return <ProfileIcon size={24} source={{ uri: assets?.[1].uri }} />;
       default:
@@ -59,19 +60,12 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
       {state?.routes?.map(({ name }, index) => {
         const Logo = () => getImage(name);
         if (name === "Cart") {
-          const Icon = (
-            <SvgUri
-              width={24}
-              height={24}
-              fill="#fff"
-              uri={assets?.[0]?.uri || ""}
-            />
-          );
+          const CartIcon = <Logo />;
           return (
             <CartButton
               key={name}
               style={styles.cartButton}
-              Icon={Icon}
+              Icon={CartIcon}
               onPress={() => onPress(name)}
             />
           );
