@@ -64,7 +64,6 @@ const Home = () => {
         <ListHeader>Search results for ...</ListHeader>
         {Platform.OS === "ios" ? (
           <FlashList
-            contentContainerStyle={listContainerStyle}
             data={DATA}
             // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
