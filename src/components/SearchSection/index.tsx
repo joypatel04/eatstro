@@ -5,11 +5,17 @@ import styled from "styled-components/native";
 import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
 
+interface ISearchSection {
+  inputProps: TextInputProps;
+  onPressFilterButton: () => void;
+}
+
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-const SearchSection = (props: TextInputProps) => {
-  const onPressHandler = () => {
+const SearchSection = ({ inputProps, onPressFilterButton }: ISearchSection) => {
+  const onPress = () => {
     Keyboard.dismiss();
+    onPressFilterButton();
   };
 
   const Icon = <Ionicons name="ios-options-outline" size={24} color="#fff" />;
@@ -17,11 +23,11 @@ const SearchSection = (props: TextInputProps) => {
   return (
     <View style={{ marginBottom: 10 }}>
       <Header entering={FadeIn.delay(200).duration(1000)}>
-        <Input {...props} />
+        <Input {...inputProps} />
         <FilterButton
           style={styles.filterButton}
           Icon={Icon}
-          onPress={onPressHandler}
+          onPress={onPress}
         />
       </Header>
     </View>

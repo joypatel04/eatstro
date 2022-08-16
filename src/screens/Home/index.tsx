@@ -1,9 +1,16 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { View, FlatList, Platform } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { FlashList } from "@shopify/flash-list";
-import { SearchSection, Header, SearchSuggestions } from "~/components";
+import { Portal } from "@gorhom/portal";
+import {
+  SearchSection,
+  Header,
+  SearchSuggestions,
+  FilterBottomSheet,
+} from "~/components";
 import FoodItem from "./components/FoodItem";
 
 import { DATA } from "./data";
@@ -12,6 +19,8 @@ import { useStore } from "~/store";
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
   const insets = useSafeAreaInsets();
+  const bottomSheetRef = useRef<BottomSheetMethods>(null!);
+
   const addToSuggestions = useStore((state) => state.addToSuggestions);
   const [searchValue, setSearchValue] = useState<string>("");
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
@@ -38,6 +47,10 @@ const Home = () => {
     setShowSuggestions(false);
   };
 
+  const onPressFilterButton = () => {
+    bottomSheetRef?.current?.expand();
+  };
+
   const listContainerStyle = useMemo(
     () => ({
       paddingBottom: headerHeight + 52, // Value 52 is header height
@@ -55,10 +68,13 @@ const Home = () => {
         >
           <Header />
           <SearchSection
-            value={searchValue}
-            onChangeText={setSearchValue}
-            onFocus={onFocusSearch}
-            onSubmitEditing={onSubmitEditing}
+            inputProps={{
+              value: searchValue,
+              onChangeText: setSearchValue,
+              onFocus: onFocusSearch,
+              onSubmitEditing: onSubmitEditing,
+            }}
+            onPressFilterButton={onPressFilterButton}
           />
         </View>
         <ListHeader>Search results for ...</ListHeader>
@@ -88,6 +104,9 @@ const Home = () => {
           headerHeight={headerHeight}
         />
       )}
+      <Portal hostName="filterBottomSheet">
+        <FilterBottomSheet ref={bottomSheetRef} />
+      </Portal>
     </>
   );
 };

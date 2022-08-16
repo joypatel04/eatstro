@@ -7,19 +7,19 @@ import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import { EdgeInsets } from "react-native-safe-area-context";
 import { useStore } from "~/store";
 
-type SearchSuggestions = {
+interface ISearchSuggestions {
   headerHeight: number;
   insets: EdgeInsets;
   onCloseSuggestions: () => void;
   onSelectSuggestions: (value: string) => void;
-};
+}
 
 const SearchSuggestions = ({
   headerHeight,
   insets,
   onCloseSuggestions,
   onSelectSuggestions,
-}: SearchSuggestions) => {
+}: ISearchSuggestions) => {
   const { height: fullHeight } = useWindowDimensions();
   const suggestions = useStore((state) => state.suggestions);
   const removeFromSuggestions = useStore(
@@ -68,8 +68,6 @@ const SearchSuggestions = ({
   );
 };
 
-export default SearchSuggestions;
-
 const Container = styled(Animated.FlatList)`
   width: 100%;
   background-color: white;
@@ -117,3 +115,5 @@ const ButtonText = styled.Text`
 const ActionButton = styled.Pressable`
   margin-left: 20px;
 `;
+
+export default SearchSuggestions;
