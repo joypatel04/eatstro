@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   TouchableWithoutFeedback,
   Keyboard,
@@ -13,7 +13,6 @@ import { SearchSection, Header, SearchSuggestions } from "~/components";
 import FoodItem from "./components/FoodItem";
 
 import { DATA } from "./data";
-import { useMemo } from "react";
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView

@@ -1,6 +1,6 @@
+import { ReactElement } from "react";
 import { StyleSheet } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import { SvgUri } from "react-native-svg";
 import styled from "styled-components/native";
 import { useAssets } from "expo-asset";
 import { AnimatedPressable } from "~/components";
@@ -15,12 +15,9 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
     navigation.navigate(name);
   };
 
-  const [assets] = useAssets([
-    require("assets/cart.svg"),
-    require("assets/profile.png"),
-  ]);
+  const [assets] = useAssets([require("assets/profile.png")]);
 
-  const getImage = (name: string) => {
+  const getImage = (name: string): ReactElement | null => {
     switch (name) {
       case "Home":
         return (
@@ -49,9 +46,9 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
       case "Cart":
         return <CartLogo width={24} height={24} color={"#FFF"} />;
       case "Profile":
-        return <ProfileIcon size={24} source={{ uri: assets?.[1].uri }} />;
+        return <ProfileIcon size={24} source={{ uri: assets?.[0].uri }} />;
       default:
-        return <ProfileIcon size={24} source={{ uri: assets?.[1].uri }} />;
+        return null;
     }
   };
 

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import { useWindowDimensions } from "react-native";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
@@ -7,7 +7,6 @@ import Toast from "react-native-toast-message";
 import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
-import { useMemo } from "react";
 
 const FoodItem = ({ item }: { item: any }) => {
   const { width } = useWindowDimensions();
