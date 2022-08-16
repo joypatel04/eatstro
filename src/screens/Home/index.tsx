@@ -1,11 +1,5 @@
 import { useState, useMemo } from "react";
-import {
-  TouchableWithoutFeedback,
-  Keyboard,
-  View,
-  FlatList,
-  Platform,
-} from "react-native";
+import { View, FlatList, Platform } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlashList } from "@shopify/flash-list";
