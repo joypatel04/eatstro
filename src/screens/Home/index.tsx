@@ -16,6 +16,7 @@ import {
   FilterBottomSheet,
   LoadingIndicator,
 } from "~/components";
+import { IFilters } from "~/constants";
 import { Item } from "~/generated/graphql";
 import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 
@@ -31,7 +32,8 @@ const Home = () => {
 
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const { searchName, setSearchName, items, isFetching } = useGetFoodItems();
+  const { searchName, setSearchName, items, isFetching, setAdditionalFilters } =
+    useGetFoodItems();
 
   const onFocusSearch = () => {
     setShowSuggestions(true);
@@ -52,6 +54,15 @@ const Home = () => {
 
   const onCloseBottomSheet = () => {
     bottomSheetRef?.current?.close();
+  };
+
+  const onApplyFilter = (filter: IFilters) => {
+    setAdditionalFilters({
+      costRange: filter?.cost?.value || null,
+      dietaryChoice: filter?.dietary?.value || null,
+      cuisineType: filter?.cuisines?.value || null,
+    });
+    onCloseBottomSheet();
   };
 
   const listContainerStyle = useMemo(
@@ -115,6 +126,7 @@ const Home = () => {
       <Portal hostName="filterBottomSheet">
         <FilterBottomSheet
           ref={bottomSheetRef}
+          onApplyFilter={onApplyFilter}
           onCloseBottomSheet={onCloseBottomSheet}
         />
       </Portal>
