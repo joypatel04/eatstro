@@ -11,7 +11,7 @@ import {
   SearchSuggestions,
   FilterBottomSheet,
 } from "~/components";
-import { Item } from "~/generated/graphql";
+import { Item as IFoodItem } from "~/generated/graphql";
 import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 import FoodItem from "./components/FoodItem";
 
@@ -78,7 +78,7 @@ const Home = () => {
             // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
             estimatedItemSize={200}
-            renderItem={({ item }: { item: Item }) => <FoodItem item={item} />}
+            renderItem={({ item }) => <FoodItem item={item} />}
           />
         ) : (
           <FlatList
@@ -86,7 +86,7 @@ const Home = () => {
             data={items}
             // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }: { item: Item }) => <FoodItem item={item} />}
+            renderItem={({ item }) => <FoodItem item={item} />}
           />
         )}
       </Container>
