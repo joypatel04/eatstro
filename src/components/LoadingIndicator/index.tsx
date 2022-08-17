@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import LottieView from "lottie-react-native";
 
-const LoadingIndicator = ({ customLoaderStyles = {} }) => (
+const LoadingIndicator = () => (
   <Container>
     <Lottie loop autoPlay source={require("./LottieFiles/prepare-food.json")} />
   </Container>

@@ -80,7 +80,10 @@ const Home = () => {
             onPressFilterButton={onPressFilterButton}
           />
         </View>
-        <ListHeader>Search results for ...</ListHeader>
+        {searchName !== "" && (
+          <ListHeader>{`Search results for "${searchName}"`}</ListHeader>
+        )}
+
         {isFetching ? (
           <LoadingIndicator />
         ) : (
@@ -125,7 +128,7 @@ const Container = styled.View`
 `;
 
 const ListHeader = styled.Text`
-  padding-top: 12px;
+  /* padding-top: 12px; */
   padding-bottom: 12px;
   font-size: 20px;
   font-weight: 400;

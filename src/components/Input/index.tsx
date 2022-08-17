@@ -1,11 +1,6 @@
-import { useState } from "react";
-import { TextInput, TextInputProps, StyleSheet } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import styled from "styled-components/native";
 import { Feather } from "@expo/vector-icons";
-
-type InputProps = {
-  inputProps: TextInputProps;
-};
 
 const Input = (props: TextInputProps) => (
   <Container>
@@ -19,16 +14,6 @@ const Input = (props: TextInputProps) => (
     />
   </Container>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    shadowColor: "rgba(34, 43, 50, 0.1)",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 40,
-    elevation: 2,
-  },
-});
 
 const Container = styled.View`
   min-width: 83%;
