@@ -67,12 +67,15 @@ const FoodItem = ({ item }: { item: IFoodItem }) => {
       </TopSection>
       <Section>
         <DetailSection>
-          <PrimaryText>{item.name}</PrimaryText>
+          <FoodDetailContainer>
+            <PrimaryText>{item.name}</PrimaryText>
+            <SecondaryText>{`(${item.cuisineType})`}</SecondaryText>
+          </FoodDetailContainer>
           <SvgUri width={24} height={24} uri={assets?.[0]?.uri || ""} />
         </DetailSection>
         <DetailCenterSection>
           <SvgUri width={16} height={16} uri={assets?.[1]?.uri || ""} />
-          <Calories>749 kcal</Calories>
+          <SecondaryText>749 kcal</SecondaryText>
         </DetailCenterSection>
         <Description>
           Homemade beef cutlet with signature sauce with parmesan and mustard
@@ -162,6 +165,11 @@ const DetailSection = styled.View`
   margin-bottom: 5px;
 `;
 
+const FoodDetailContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
 const PrimaryText = styled.Text`
   font-size: 16px;
   line-height: 24px;
@@ -183,7 +191,7 @@ const DetailCenterSection = styled.View`
   margin-bottom: 5px;
 `;
 
-const Calories = styled.Text`
+const SecondaryText = styled.Text`
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;

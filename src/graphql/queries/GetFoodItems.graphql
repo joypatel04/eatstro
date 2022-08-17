@@ -3,11 +3,15 @@ query GetFoodItems(
   $priceGte: Int
   $priceLte: Int
   $isPublished: Boolean
+  $dietaryChoice: String
+  $cuisineType: String
 ) {
   items(
     where: {
       name: { startsWith: $name }
       price: { gte: $priceGte, lte: $priceLte }
+      dietaryChoice: { contains: $dietaryChoice }
+      cuisineType: { contains: $cuisineType }
       isPublished: { eq: $isPublished }
     }
   ) {

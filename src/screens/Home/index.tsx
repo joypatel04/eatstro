@@ -22,7 +22,7 @@ const Home = () => {
 
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const { searchName, setSearchName, items, status } = useGetFoodItems();
+  const { searchName, setSearchName, items } = useGetFoodItems();
 
   const onFocusSearch = () => {
     setShowSuggestions(true);

@@ -30,6 +30,8 @@ export const useGetFoodItems = (): {
     {
       isPublished: false,
       name: debouncedValue,
+      dietaryChoice: "",
+      cuisineType: "",
     },
     {
       queryKey: ["getFoodItemQueryKey", debouncedValue],

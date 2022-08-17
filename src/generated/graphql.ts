@@ -159,6 +159,8 @@ export type GetFoodItemsQueryVariables = Exact<{
   priceGte?: InputMaybe<Scalars['Int']>;
   priceLte?: InputMaybe<Scalars['Int']>;
   isPublished?: InputMaybe<Scalars['Boolean']>;
+  dietaryChoice?: InputMaybe<Scalars['String']>;
+  cuisineType?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -166,9 +168,9 @@ export type GetFoodItemsQuery = { __typename?: 'RootQuery', items?: Array<{ __ty
 
 
 export const GetFoodItemsDocument = `
-    query GetFoodItems($name: String, $priceGte: Int, $priceLte: Int, $isPublished: Boolean) {
+    query GetFoodItems($name: String, $priceGte: Int, $priceLte: Int, $isPublished: Boolean, $dietaryChoice: String, $cuisineType: String) {
   items(
-    where: {name: {startsWith: $name}, price: {gte: $priceGte, lte: $priceLte}, isPublished: {eq: $isPublished}}
+    where: {name: {startsWith: $name}, price: {gte: $priceGte, lte: $priceLte}, dietaryChoice: {contains: $dietaryChoice}, cuisineType: {contains: $cuisineType}, isPublished: {eq: $isPublished}}
   ) {
     id
     name
