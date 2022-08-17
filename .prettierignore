@@ -4,3 +4,5 @@ android/
 /src/generated/
 .vscode
 app.json
+.expo/
+.expo-shared
