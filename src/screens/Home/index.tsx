@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import { View, FlatList, Platform } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -10,10 +10,11 @@ import {
   Header,
   SearchSuggestions,
   FilterBottomSheet,
+  LoadingIndicator,
 } from "~/components";
-import { Item as IFoodItem } from "~/generated/graphql";
 import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 import FoodItem from "./components/FoodItem";
+import EmptyList from "./components/EmptyList";
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
@@ -22,7 +23,7 @@ const Home = () => {
 
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const { searchName, setSearchName, items } = useGetFoodItems();
+  const { searchName, setSearchName, items, isFetching } = useGetFoodItems();
 
   const onFocusSearch = () => {
     setShowSuggestions(true);
@@ -47,7 +48,7 @@ const Home = () => {
 
   const listContainerStyle = useMemo(
     () => ({
-      paddingBottom: headerHeight + 52, // Value 52 is header height
+      paddingBottom: headerHeight, // Value 52 is header height
     }),
     []
   );
@@ -72,21 +73,29 @@ const Home = () => {
           />
         </View>
         <ListHeader>Search results for ...</ListHeader>
-        {Platform.OS === "ios" ? (
+        {isFetching ? (
+          <LoadingIndicator />
+        ) : Platform.OS === "ios" ? (
           <FlashList
             data={items}
-            // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            // horizontal // Uncommenting flag will turn list into horizontally
             estimatedItemSize={200}
             renderItem={({ item }) => <FoodItem item={item} />}
+            ListEmptyComponent={<EmptyList searchName={searchName} />}
+            keyExtractor={({ id }) => id?.toString() as string}
           />
         ) : (
           <FlatList
             contentContainerStyle={listContainerStyle}
             data={items}
-            // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+            // horizontal // Uncommenting flag will turn list into horizontally
             renderItem={({ item }) => <FoodItem item={item} />}
+            ListEmptyComponent={<EmptyList searchName={searchName} />}
+            keyExtractor={({ id }) => id?.toString() as string}
           />
         )}
       </Container>

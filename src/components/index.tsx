@@ -4,6 +4,7 @@ import Input from "./Input";
 import SearchSection from "./SearchSection";
 import SearchSuggestions from "./SearchSuggestions";
 import FilterBottomSheet from "./FilterBottomSheet";
+import LoadingIndicator from "./LoadingIndicator";
 
 export {
   AnimatedPressable,
@@ -12,4 +13,5 @@ export {
   Header,
   SearchSuggestions,
   FilterBottomSheet,
+  LoadingIndicator,
 };
