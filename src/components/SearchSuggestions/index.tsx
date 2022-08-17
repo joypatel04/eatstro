@@ -89,6 +89,7 @@ const SuggestionButton = styled(Pressable)`
 
 const Suggestion = styled(Text)`
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
   font-size: 18px;
   line-height: 24px;
   font-weight: 500;
@@ -105,6 +106,7 @@ const ClearAllContainer = styled.View`
 
 const ButtonText = styled.Text`
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_B"]};
   font-size: 16px;
   line-height: 22px;
   font-weight: 600;

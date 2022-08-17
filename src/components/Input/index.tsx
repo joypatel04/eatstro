@@ -8,7 +8,7 @@ const Input = (props: TextInputProps) => (
   <Container>
     <Feather name="search" size={24} color={defaultTheme.COLORS.ICON_COLOR} />
     <CustomInput
-      placeholderTextColor={defaultTheme.COLORS.TITLE_COLOR}
+      placeholderTextColor={defaultTheme.COLORS.L_TITLE_COLOR}
       placeholder="Search something..."
       maxLength={28}
       returnKeyType="search"
@@ -33,6 +33,7 @@ const CustomInput = styled(TextInput)`
   padding-left: 8px;
   font-size: 16px;
   font-weight: 400;
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
 `;
 
 export default Input;

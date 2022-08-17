@@ -6,6 +6,7 @@ declare module "styled-components" {
       PRIMARY_COLOR: string;
       WHITE: string;
       TITLE_COLOR: string;
+      L_TITLE_COLOR: string;
       SHADOW_COLOR: string;
       BORDER_COLOR: string;
       ICON_COLOR: string;
@@ -13,6 +14,7 @@ declare module "styled-components" {
 
     // Fonts
     FONTS: {
+      DMSans_B: string;
       DMSans_M: string;
       DMSans: string;
       Able: string;

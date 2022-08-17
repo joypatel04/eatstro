@@ -33,6 +33,7 @@ const FilterText = styled(Text)`
   margin-left: 16px;
   font-weight: 500;
   font-size: 16px;
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
 `;
 
 const RadioButton = styled(View)<{ isSelected: boolean }>`

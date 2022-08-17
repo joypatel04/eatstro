@@ -139,11 +139,11 @@ const Container = styled.View`
 `;
 
 const ListHeader = styled.Text`
-  /* padding-top: 12px; */
   padding-bottom: 12px;
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
+  font-family: ${(props) => props.theme.FONTS["Able"]};
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
 `;
 

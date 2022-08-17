@@ -191,6 +191,7 @@ const PrimaryText = styled.Text`
   font-size: 16px;
   line-height: 24px;
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_B"]};
   font-weight: 700;
 `;
 
@@ -199,6 +200,7 @@ const Description = styled.Text`
   line-height: 16px;
   font-weight: 500;
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
 `;
 
 const DetailCenterSection = styled.View`
@@ -212,8 +214,8 @@ const SecondaryText = styled.Text`
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  opacity: 0.5;
-  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  color: ${(props) => props.theme.COLORS["L_TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
   margin-left: 6.75px;
 `;
 

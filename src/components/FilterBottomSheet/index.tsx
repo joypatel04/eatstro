@@ -140,6 +140,7 @@ const HeaderTitle = styled.Text`
   font-size: 24px;
   line-height: 30px;
   color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_B"]};
   font-weight: 700;
 `;
 
@@ -170,6 +171,7 @@ const ClearButton = styled(TouchableOpacity)`
   width: 30%;
   height: 50px;
   background-color: ${(props) => props.theme.COLORS["WHITE"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
   justify-content: center;
   align-items: center;
 `;
@@ -185,6 +187,7 @@ const ApplyButton = styled(Pressable)`
   width: 50%;
   height: 50px;
   background-color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
+  font-family: ${(props) => props.theme.FONTS["DMSans_B"]};
   border-radius: 12px;
   justify-content: center;
   align-items: center;

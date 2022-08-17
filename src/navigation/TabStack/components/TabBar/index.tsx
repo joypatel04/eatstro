@@ -145,6 +145,7 @@ const Tab = styled.View`
 
 const Title = styled.Text`
   color: ${(props: { color: string }) => props.color};
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
   margin-top: 4px;
   font-size: 12px;
   line-height: 20px;

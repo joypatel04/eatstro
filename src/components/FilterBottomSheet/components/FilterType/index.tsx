@@ -56,6 +56,7 @@ const FilterText = styled(Text)<{ isActive: boolean }>`
   margin-left: 10px;
   font-weight: 500;
   font-size: 16px;
+  font-family: ${(props) => props.theme.FONTS["DMSans_M"]};
   color: ${(props) =>
     props.isActive
       ? props.theme.COLORS["PRIMARY_COLOR"]
