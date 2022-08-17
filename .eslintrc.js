@@ -10,5 +10,6 @@ module.exports = {
         "ts-ignore": "allow-with-description",
       },
     ],
+    "no-console": 1,
   },
 };
