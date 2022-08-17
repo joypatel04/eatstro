@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, act } from "@testing-library/react-hooks";
 
