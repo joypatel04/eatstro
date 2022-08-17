@@ -9,7 +9,7 @@
       "~screens": ["src/screens/index"],
       "~constants": ["src/constants/index"],
       "~components": ["src/components/index"],
-      "~assets": ["./assets/*"],
+      "~assets": ["./assets/*"]
     }
   },
   "exclude": [

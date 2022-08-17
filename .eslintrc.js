@@ -1,4 +1,5 @@
 module.exports = {
+  plugins: ["prettier"],
   extends: "universe/native",
   ignorePatterns: ["metro.config.js", "**/generated/*.ts"],
   rules: {

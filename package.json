@@ -9,7 +9,8 @@
     "eject": "expo eject",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
-    "lint-and-fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix"
+    "lint-and-fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "prettier-format": "prettier --config .prettierrc '**/*.{json,js,jsx,ts,tsx}' --write"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.3",
