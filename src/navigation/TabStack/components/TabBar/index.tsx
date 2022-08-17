@@ -1,14 +1,16 @@
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { useAssets } from "expo-asset";
 import { ReactElement } from "react";
 import { StyleSheet } from "react-native";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import styled from "styled-components/native";
-import { useAssets } from "expo-asset";
+
+import CartLogo from "./Icons/CartLogo";
+import FavouriteLogo from "./Icons/FavouriteLogo";
+import HomeLogo from "./Icons/HomeLogo";
+import OrderLogo from "./Icons/OrderLogo";
+
 import { AnimatedPressable } from "~/components";
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
-import HomeLogo from "./Icons/HomeLogo";
-import FavouriteLogo from "./Icons/FavouriteLogo";
-import OrderLogo from "./Icons/OrderLogo";
-import CartLogo from "./Icons/CartLogo";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const onPress = (name: string) => {
@@ -44,7 +46,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           />
         );
       case "Cart":
-        return <CartLogo width={24} height={24} color={"#FFF"} />;
+        return <CartLogo width={24} height={24} color="#FFF" />;
       case "Profile":
         return <ProfileIcon size={24} source={{ uri: assets?.[0].uri }} />;
       default:
@@ -74,7 +76,7 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
               <Title color={state.index === index ? "#F16B59" : "#D1D1D1"}>
                 {name}
               </Title>
-              {state.index === index && <DotIcon size={6} color={"#F16B59"} />}
+              {state.index === index && <DotIcon size={6} color="#F16B59" />}
             </Tab>
           </TabButton>
         );

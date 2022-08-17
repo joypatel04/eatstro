@@ -1,10 +1,11 @@
+import { Entypo } from "@expo/vector-icons";
+import { useAssets } from "expo-asset";
 import { useCallback, useState, useMemo, memo } from "react";
 import { useWindowDimensions } from "react-native";
-import { useAssets } from "expo-asset";
-import styled from "styled-components/native";
 import FastImage from "react-native-fast-image";
 import Toast from "react-native-toast-message";
-import { Entypo } from "@expo/vector-icons";
+import styled from "styled-components/native";
+
 import { AnimatedPressable } from "~/components";
 import { Item as IFoodItem } from "~/generated/graphql";
 

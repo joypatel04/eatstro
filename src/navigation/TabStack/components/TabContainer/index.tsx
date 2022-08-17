@@ -1,11 +1,13 @@
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { Canvas, Path } from "@shopify/react-native-skia";
+import { line, curveBasis } from "d3-shape";
 import React, { useMemo } from "react";
 import { useWindowDimensions, View, StyleSheet } from "react-native";
-import { Canvas, Path, Skia } from "@shopify/react-native-skia";
-import { line, curveBasis } from "d3-shape";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import styled from "styled-components/native";
-import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
+
 import TabBar from "../TabBar";
+
+import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 
 interface LineProp {
   x: number;

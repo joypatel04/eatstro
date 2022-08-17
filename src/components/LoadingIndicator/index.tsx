@@ -1,6 +1,6 @@
+import LottieView from "lottie-react-native";
 import React from "react";
 import styled from "styled-components/native";
-import LottieView from "lottie-react-native";
 
 const LoadingIndicator = () => (
   <Container>

@@ -1,6 +1,6 @@
+import { Feather } from "@expo/vector-icons";
 import { TextInput, TextInputProps } from "react-native";
 import styled from "styled-components/native";
-import { Feather } from "@expo/vector-icons";
 
 const Input = (props: TextInputProps) => (
   <Container>

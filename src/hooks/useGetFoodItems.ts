@@ -1,9 +1,11 @@
 import { QueryStatus } from "@tanstack/react-query";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
-import { Item as IFoodItem, useGetFoodItemsQuery } from "~/generated/graphql";
-import client from "~/utils/client";
+
 import { useDebounce } from "./useDebounce";
+
+import { Item as IFoodItem, useGetFoodItemsQuery } from "~/generated/graphql";
 import { useStore } from "~/store";
+import client from "~/utils/client";
 
 export const useGetFoodItems = (): {
   searchName: string;

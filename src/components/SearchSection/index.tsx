@@ -1,7 +1,8 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Keyboard, View, StyleSheet, TextInputProps } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
-import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
+
 import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
 
@@ -51,10 +52,6 @@ const Header = styled(AnimatedView)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-`;
-
-const FiltersSection = styled(AnimatedView)`
-  padding-top: 12px;
 `;
 
 const FilterButton = styled(AnimatedPressable)`

@@ -1,10 +1,14 @@
+import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import { Portal } from "@gorhom/portal";
+import { FlashList } from "@shopify/flash-list";
 import { useState, useMemo, useRef } from "react";
 import { View, FlatList as List, Platform } from "react-native";
-import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { FlashList } from "@shopify/flash-list";
-import { Portal } from "@gorhom/portal";
+import styled from "styled-components/native";
+
+import EmptyList from "./components/EmptyList";
+import FoodItem from "./components/FoodItem";
+
 import {
   SearchSection,
   Header,
@@ -12,10 +16,8 @@ import {
   FilterBottomSheet,
   LoadingIndicator,
 } from "~/components";
-import { useGetFoodItems } from "~/hooks/useGetFoodItems";
-import FoodItem from "./components/FoodItem";
-import EmptyList from "./components/EmptyList";
 import { Item } from "~/generated/graphql";
+import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 
 const FlatList = Platform.OS === "ios" ? FlashList : List;
 interface IFoodListItem {

@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo, forwardRef } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import React, { useCallback, useMemo, forwardRef } from "react";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 interface IFilterBottomSheet {
@@ -46,10 +46,10 @@ const FilterBottomSheet = forwardRef<BottomSheetMethods, IFilterBottomSheet>(
             </CloseIcon>
           </HeaderContainer>
           <FooterContainer>
-            <ClearButton>
+            <ClearButton onPress={onClearFilter}>
               <ClearTitle>Clear Filters</ClearTitle>
             </ClearButton>
-            <ApplyButton>
+            <ApplyButton onPress={onApplyFilter}>
               <ApplyTitle>Apply</ApplyTitle>
             </ApplyButton>
           </FooterContainer>
@@ -58,13 +58,6 @@ const FilterBottomSheet = forwardRef<BottomSheetMethods, IFilterBottomSheet>(
     );
   }
 );
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: 16,
-    alignItems: "flex-start",
-  },
-});
 
 const Container = styled.View`
   flex: 1;

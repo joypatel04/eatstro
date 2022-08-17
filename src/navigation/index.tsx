@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+
 import TabStack from "~/navigation/TabStack";
 
 const Stack = createStackNavigator();

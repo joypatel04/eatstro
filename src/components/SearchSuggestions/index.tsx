@@ -1,10 +1,10 @@
-import { Pressable, Text } from "react-native";
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
-import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
-import { Platform, useWindowDimensions } from "react-native";
-import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
+import { Pressable, Text, Platform, useWindowDimensions } from "react-native";
+import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 import { EdgeInsets } from "react-native-safe-area-context";
+import styled from "styled-components/native";
+
+import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import { useStore } from "~/store";
 
 interface ISearchSuggestions {

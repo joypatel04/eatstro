@@ -1,11 +1,12 @@
-import { useCallback } from "react";
 import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
+import { useCallback } from "react";
+
+import TabContainer from "./components/TabContainer";
 
 import { Home, Favourite, Cart, Orders, Profile } from "~/screens";
-import TabContainer from "./components/TabContainer";
 
 const Tab = createBottomTabNavigator();
 

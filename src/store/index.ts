@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import create from "zustand";
-import { persist, combine } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 interface IStore {
   suggestions: string[];
@@ -20,7 +20,7 @@ export const useStore = create<IStore>()(
             return {
               suggestions: [
                 suggestion,
-                ...get().suggestions.filter((s) => s != suggestion),
+                ...get().suggestions.filter((s) => s !== suggestion),
               ].slice(0, 7),
             };
           }
