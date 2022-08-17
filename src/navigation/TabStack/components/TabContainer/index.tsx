@@ -8,11 +8,7 @@ import styled from "styled-components/native";
 import TabBar from "../TabBar";
 
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
-
-interface LineProp {
-  x: number;
-  y: number;
-}
+import { ILine } from "~/types";
 
 const TabContainer = (props: BottomTabBarProps) => {
   const { width } = useWindowDimensions();
@@ -21,7 +17,7 @@ const TabContainer = (props: BottomTabBarProps) => {
   const ratio = width / NAVIGATION_BOTTOM_TABS_HEIGHT;
 
   const d = useMemo(() => {
-    const fixShape = line<LineProp>()
+    const fixShape = line<ILine>()
       .x(({ x }) => x)
       .y(({ y }) => y)
       .curve(curveBasis)([
@@ -37,12 +33,10 @@ const TabContainer = (props: BottomTabBarProps) => {
       { x: 20, y: 0 },
     ]);
 
-    const centerCurve = line<LineProp>()
+    const centerCurve = line<ILine>()
       .x(({ x }) => x)
       .y(({ y }) => y)
       .curve(curveBasis)([
-      // OLD
-
       { x: tabWidth * 1.5, y: 0 },
       { x: tabWidth * 1.5 + 12, y: 0 },
       { x: tabWidth * 1.5 + 24, y: 8 },
@@ -54,7 +48,6 @@ const TabContainer = (props: BottomTabBarProps) => {
     ]);
 
     return `${centerCurve} ${fixShape}`;
-    // return `${leftEdges}`;
   }, []);
 
   return (

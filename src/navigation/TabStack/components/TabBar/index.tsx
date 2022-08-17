@@ -11,6 +11,7 @@ import OrderLogo from "./Icons/OrderLogo";
 
 import { AnimatedPressable } from "~/components";
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
+import { DotIconProps } from "~/types";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const onPress = (name: string) => {
@@ -127,11 +128,6 @@ const Title = styled.Text`
   font-weight: 700;
   text-align: center;
 `;
-
-interface DotIconProps {
-  size: number;
-  color: string;
-}
 
 const DotIcon = styled.Image`
   margin-top: 4px;

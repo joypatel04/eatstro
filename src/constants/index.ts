@@ -1,30 +1,4 @@
-export type IAdditionalFilter = {
-  dietaryChoice: string | null;
-  cuisineType: string | null;
-  costRange: [number, number] | null;
-};
-
-export type IChoices = {
-  id: string;
-  displayText: string;
-  value: string;
-  key: string;
-};
-
-export type ICost = {
-  id: string;
-  displayText: string;
-  value: [number, number];
-  key: string;
-};
-
-export type IActiveFilter = "cost" | "dietary" | "cuisines";
-
-export type IFilters = {
-  cost?: ICost | undefined;
-  dietary?: IChoices | undefined;
-  cuisines?: IChoices | undefined;
-};
+import { IChoices, ICost, IParentFilters } from "~/types";
 
 export const NAVIGATION_BOTTOM_TABS_HEIGHT = 96;
 
@@ -87,45 +61,39 @@ export const CUISINE_CHOICE_MAP: IChoices[] = [
     id: "9",
     displayText: "Chinese",
     value: "Chinese",
-    key: "cuisine",
+    key: "cuisines",
   },
   {
     id: "10",
     displayText: "Indian",
     value: "Indian",
-    key: "cuisine",
+    key: "cuisines",
   },
   {
     id: "11",
     displayText: "Japanese",
     value: "Japanese",
-    key: "cuisine",
+    key: "cuisines",
   },
   {
     id: "12",
     displayText: "Italian",
     value: "Italian",
-    key: "cuisine",
+    key: "cuisines",
   },
   {
     id: "13",
     displayText: "French",
     value: "French",
-    key: "cuisine",
+    key: "cuisines",
   },
   {
     id: "14",
     displayText: "Thai",
     value: "Thai",
-    key: "cuisine",
+    key: "cuisines",
   },
 ];
-
-interface IParentFilters {
-  id: string;
-  displayText: string;
-  key: "cost" | "dietary" | "cuisines";
-}
 
 export const PARENT_FILTERS: IParentFilters[] = [
   {

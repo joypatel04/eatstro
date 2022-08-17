@@ -1,19 +1,19 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Keyboard, View, StyleSheet, TextInputProps } from "react-native";
+import { Keyboard, View, StyleSheet } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
 import styled from "styled-components/native";
 
 import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
 
-interface ISearchSection {
-  inputProps: TextInputProps;
-  onPressFilterButton: () => void;
-}
+import { ISearchSectionProps } from "~/types";
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-const SearchSection = ({ inputProps, onPressFilterButton }: ISearchSection) => {
+const SearchSection = ({
+  inputProps,
+  onPressFilterButton,
+}: ISearchSectionProps) => {
   const onPress = () => {
     Keyboard.dismiss();
     onPressFilterButton();

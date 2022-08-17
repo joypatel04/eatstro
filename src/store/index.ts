@@ -2,12 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
-interface IStore {
-  suggestions: string[];
-  addToSuggestions: (suggestion: string) => void;
-  removeFromSuggestions: (suggestion: string) => void;
-  clearSuggestions: () => void;
-}
+import { IStore } from "~/types";
 
 export const useStore = create<IStore>()(
   persist(

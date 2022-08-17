@@ -16,14 +16,11 @@ import {
   FilterBottomSheet,
   LoadingIndicator,
 } from "~/components";
-import { IFilters } from "~/constants";
 import { Item } from "~/generated/graphql";
 import { useGetFoodItems } from "~/hooks/useGetFoodItems";
+import { IFilters, IFoodListItemProps } from "~/types";
 
 const FlatList = Platform.OS === "ios" ? FlashList : List;
-interface IFoodListItem {
-  item: Item;
-}
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
@@ -72,7 +69,7 @@ const Home = () => {
     []
   );
 
-  const renderItem = ({ item }: IFoodListItem) => <FoodItem item={item} />;
+  const renderItem = ({ item }: IFoodListItemProps) => <FoodItem item={item} />;
 
   return (
     <>

@@ -1,21 +1,14 @@
 import { TouchableOpacity, Text, View } from "react-native";
 import styled from "styled-components/native";
 
-import { ICost, IChoices, IActiveFilter, IFilters } from "~/constants";
-
-interface IChoiceType {
-  choice: IChoices | ICost;
-  activeFilter: IActiveFilter;
-  onPress: () => void;
-  filters: IFilters | undefined;
-}
+import { IChoiceTypeProps } from "~/types";
 
 const ChoiceType = ({
   choice,
   activeFilter,
   filters,
   onPress,
-}: IChoiceType) => {
+}: IChoiceTypeProps) => {
   const isSelected =
     activeFilter && filters?.[activeFilter]?.displayText === choice.displayText;
   return (

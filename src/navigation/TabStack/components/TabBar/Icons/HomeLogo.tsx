@@ -1,13 +1,8 @@
-import { ColorValue } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-type HomeLogoProps = {
-  color: ColorValue;
-  width: number;
-  height: number;
-};
+import { SvgLogoProps } from "~/types";
 
-const HomeLogo = ({ color, width, height }: HomeLogoProps) => (
+const HomeLogo = ({ color, width, height }: SvgLogoProps) => (
   <Svg
     width={width}
     height={height}

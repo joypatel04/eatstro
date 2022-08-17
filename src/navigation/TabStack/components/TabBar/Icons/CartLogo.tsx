@@ -1,13 +1,8 @@
-import { ColorValue } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-type CartLogoProps = {
-  color: ColorValue;
-  width: number;
-  height: number;
-};
+import { SvgLogoProps } from "~/types";
 
-const CartLogo = ({ color, width, height }: CartLogoProps) => (
+const CartLogo = ({ color, width, height }: SvgLogoProps) => (
   <Svg
     width={width}
     height={height}

@@ -1,5 +1,4 @@
-import { ReactElement } from "react";
-import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
+import { Pressable } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -7,12 +6,7 @@ import Animated, {
   ZoomIn,
 } from "react-native-reanimated";
 
-interface Props extends PressableProps {
-  Icon?: ReactElement<unknown, string>;
-  style?: StyleProp<ViewStyle>;
-  enableEnterAnimation?: boolean;
-  enterAnimationDelay?: number;
-}
+import { AnimatedPressableProps } from "~/types";
 
 const ReanimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -22,7 +16,7 @@ const AnimatedPressable = ({
   enableEnterAnimation = false,
   enterAnimationDelay = 0,
   ...restProps
-}: Props) => {
+}: AnimatedPressableProps) => {
   const scale = useSharedValue(1);
 
   const animatedButtonStyle = useAnimatedStyle(() => ({

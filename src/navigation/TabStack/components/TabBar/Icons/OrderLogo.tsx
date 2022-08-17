@@ -1,13 +1,8 @@
-import { ColorValue } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-type OrderLogoProps = {
-  color: ColorValue;
-  width: number;
-  height: number;
-};
+import { SvgLogoProps } from "~/types";
 
-const OrderLogo = ({ color, width, height }: OrderLogoProps) => (
+const OrderLogo = ({ color, width, height }: SvgLogoProps) => (
   <Svg
     width={width}
     height={height}

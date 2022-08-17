@@ -1,10 +1,8 @@
 import styled from "styled-components/native";
 
-interface IEmptyList {
-  searchName: string;
-}
+import { IEmptyListProps } from "~/types";
 
-const EmptyList = ({ searchName }: IEmptyList) => (
+const EmptyList = ({ searchName }: IEmptyListProps) => (
   <Container>
     <SubTitle>{`We couldn't find any results for "${searchName}"`} </SubTitle>
   </Container>

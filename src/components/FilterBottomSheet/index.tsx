@@ -8,117 +8,113 @@ import styled from "styled-components/native";
 import ChoiceType from "./components/ChoiceType";
 import FilterType from "./components/FilterType";
 
+import { PARENT_FILTERS, CHOICES_MAPPING } from "~/constants";
 import {
-  PARENT_FILTERS,
-  CHOICES_MAPPING,
   IActiveFilter,
   IFilters,
   IChoices,
   ICost,
-} from "~/constants";
+  IFilterBottomSheetProps,
+} from "~/types";
 
-interface IFilterBottomSheet {
-  onCloseBottomSheet: () => void;
-  onApplyFilter: (filter: IFilters) => void;
-}
+const FilterBottomSheet = forwardRef<
+  BottomSheetMethods,
+  IFilterBottomSheetProps
+>(({ onApplyFilter, onCloseBottomSheet, ...props }, ref) => {
+  const snapPoints = useMemo(() => ["80%"], []);
 
-const FilterBottomSheet = forwardRef<BottomSheetMethods, IFilterBottomSheet>(
-  ({ onApplyFilter, onCloseBottomSheet, ...props }, ref) => {
-    const snapPoints = useMemo(() => ["90%"], []);
+  const [activeFilter, setActiveFilter] = useState<IActiveFilter>("cost");
+  const [filters, setFilters] = useState<IFilters>({
+    cost: undefined,
+    cuisines: undefined,
+    dietary: undefined,
+  });
 
-    const [activeFilter, setActiveFilter] = useState<IActiveFilter>("cost");
-    const [filters, setFilters] = useState<IFilters>({
+  const onClearFilter = () => {
+    setFilters({
       cost: undefined,
       cuisines: undefined,
       dietary: undefined,
     });
+  };
 
-    const onClearFilter = () => {
-      setFilters({
-        cost: undefined,
-        cuisines: undefined,
-        dietary: undefined,
-      });
+  const onSelectParentFilter = (key: IActiveFilter) => {
+    setActiveFilter(key);
+  };
+
+  const onPressSelectChoice = (choice: IChoices | ICost) => {
+    const data = {
+      ...filters,
+      [activeFilter]: choice,
     };
+    setFilters(data);
+  };
 
-    const onSelectParentFilter = (key: IActiveFilter) => {
-      setActiveFilter(key);
-    };
-
-    const onPressSelectChoice = (choice: IChoices | ICost) => {
-      const data = {
-        ...filters,
-        [activeFilter]: choice,
-      };
-      setFilters(data);
-    };
-
-    const renderBackdrop = useCallback(
-      (props: any) => (
-        <BottomSheetBackdrop
-          {...props}
-          disappearsOnIndex={-1}
-          appearsOnIndex={1}
-        />
-      ),
-      []
-    );
-
-    return (
-      <BottomSheet
-        ref={ref}
-        index={-1}
-        snapPoints={snapPoints}
-        backdropComponent={renderBackdrop}
-        enablePanDownToClose
-        handleComponent={null}
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
         {...props}
-      >
-        <Container>
-          <HeaderContainer>
-            <HeaderTitle>Filter</HeaderTitle>
-            <CloseIcon onPress={onCloseBottomSheet}>
-              <Ionicons name="close-circle" size={32} color="#D1D1D1" />
-            </CloseIcon>
-          </HeaderContainer>
-          <CenterContainer>
-            <LeftSideScrollView>
-              {PARENT_FILTERS.map((p) => (
-                <FilterType
-                  key={p.id}
-                  isActive={p.key === activeFilter}
-                  filters={filters}
-                  onPress={() => onSelectParentFilter(p.key)}
-                  filterKey={p.key}
-                  type={p.displayText}
-                />
-              ))}
-            </LeftSideScrollView>
-            <RightSideScrollView>
-              {CHOICES_MAPPING[activeFilter].map((choice) => (
-                <ChoiceType
-                  key={choice.id}
-                  activeFilter={activeFilter}
-                  choice={choice}
-                  filters={filters}
-                  onPress={() => onPressSelectChoice(choice)}
-                />
-              ))}
-            </RightSideScrollView>
-          </CenterContainer>
-          <FooterContainer>
-            <ClearButton onPress={onClearFilter}>
-              <ClearTitle>Clear Filters</ClearTitle>
-            </ClearButton>
-            <ApplyButton onPress={() => onApplyFilter(filters)}>
-              <ApplyTitle>Apply</ApplyTitle>
-            </ApplyButton>
-          </FooterContainer>
-        </Container>
-      </BottomSheet>
-    );
-  }
-);
+        disappearsOnIndex={-1}
+        appearsOnIndex={1}
+      />
+    ),
+    []
+  );
+
+  return (
+    <BottomSheet
+      ref={ref}
+      index={-1}
+      snapPoints={snapPoints}
+      backdropComponent={renderBackdrop}
+      enablePanDownToClose
+      handleComponent={null}
+      {...props}
+    >
+      <Container>
+        <HeaderContainer>
+          <HeaderTitle>Filter</HeaderTitle>
+          <CloseIcon onPress={onCloseBottomSheet}>
+            <Ionicons name="close-circle" size={32} color="#D1D1D1" />
+          </CloseIcon>
+        </HeaderContainer>
+        <CenterContainer>
+          <LeftSideScrollView>
+            {PARENT_FILTERS.map((p) => (
+              <FilterType
+                key={p.id}
+                isActive={p.key === activeFilter}
+                filters={filters}
+                onPress={() => onSelectParentFilter(p.key)}
+                filterKey={p.key}
+                type={p.displayText}
+              />
+            ))}
+          </LeftSideScrollView>
+          <RightSideScrollView>
+            {CHOICES_MAPPING[activeFilter].map((choice) => (
+              <ChoiceType
+                key={choice.id}
+                activeFilter={activeFilter}
+                choice={choice}
+                filters={filters}
+                onPress={() => onPressSelectChoice(choice)}
+              />
+            ))}
+          </RightSideScrollView>
+        </CenterContainer>
+        <FooterContainer>
+          <ClearButton onPress={onClearFilter}>
+            <ClearTitle>Clear Filters</ClearTitle>
+          </ClearButton>
+          <ApplyButton onPress={() => onApplyFilter(filters)}>
+            <ApplyTitle>Apply</ApplyTitle>
+          </ApplyButton>
+        </FooterContainer>
+      </Container>
+    </BottomSheet>
+  );
+});
 
 const Container = styled.View`
   flex: 1;
@@ -150,7 +146,7 @@ const CloseIcon = styled(TouchableOpacity)`
 const CenterContainer = styled.View`
   flex-direction: row;
   width: 100%;
-  height: 75%;
+  height: 65%;
 `;
 
 const FooterContainer = styled.View`

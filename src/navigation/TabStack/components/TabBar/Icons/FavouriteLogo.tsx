@@ -1,13 +1,8 @@
-import { ColorValue } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-type FavouriteLogoProps = {
-  color: ColorValue;
-  width: number;
-  height: number;
-};
+import { SvgLogoProps } from "~/types";
 
-const FavouriteLogo = ({ color, width, height }: FavouriteLogoProps) => (
+const FavouriteLogo = ({ color, width, height }: SvgLogoProps) => (
   <Svg
     width={width}
     height={height}

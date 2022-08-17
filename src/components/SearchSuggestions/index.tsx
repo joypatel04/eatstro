@@ -1,25 +1,18 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, Platform, useWindowDimensions } from "react-native";
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
-import { EdgeInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import { useStore } from "~/store";
-
-interface ISearchSuggestions {
-  headerHeight: number;
-  insets: EdgeInsets;
-  onCloseSuggestions: () => void;
-  onSelectSuggestions: (value: string) => void;
-}
+import { ISearchSuggestionsProps } from "~/types";
 
 const SearchSuggestions = ({
   headerHeight,
   insets,
   onCloseSuggestions,
   onSelectSuggestions,
-}: ISearchSuggestions) => {
+}: ISearchSuggestionsProps) => {
   const { height: fullHeight } = useWindowDimensions();
   const suggestions = useStore((state) => state.suggestions);
   const removeFromSuggestions = useStore(

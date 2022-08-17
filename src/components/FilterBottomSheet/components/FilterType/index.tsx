@@ -1,15 +1,7 @@
 import { TouchableOpacity, Text, View } from "react-native";
 import styled from "styled-components/native";
 
-import { IActiveFilter, IFilters } from "~/constants";
-
-interface IFilterType {
-  isActive: boolean;
-  type: string;
-  onPress: () => void;
-  filters: IFilters | undefined;
-  filterKey: IActiveFilter;
-}
+import { IFilterTypeProps } from "~/types";
 
 const FilterType = ({
   isActive,
@@ -17,7 +9,7 @@ const FilterType = ({
   onPress,
   filters,
   filterKey,
-}: IFilterType) => {
+}: IFilterTypeProps) => {
   return (
     <Container
       style={{ borderColor: isActive ? "#f16b59" : "#FFF" }}

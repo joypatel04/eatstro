@@ -3,9 +3,9 @@ import { useState, Dispatch, SetStateAction, useEffect } from "react";
 
 import { useDebounce } from "./useDebounce";
 
-import { IAdditionalFilter } from "~/constants";
 import { Item as IFoodItem, useGetFoodItemsQuery } from "~/generated/graphql";
 import { useStore } from "~/store";
+import { IAdditionalFilter } from "~/types";
 import client from "~/utils/client";
 
 export const useGetFoodItems = (): {
