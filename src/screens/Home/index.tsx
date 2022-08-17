@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { View, FlatList, Platform } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -11,40 +11,30 @@ import {
   SearchSuggestions,
   FilterBottomSheet,
 } from "~/components";
+import { Item } from "~/generated/graphql";
+import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 import FoodItem from "./components/FoodItem";
-
-import { DATA } from "./data";
-import { useStore } from "~/store";
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef<BottomSheetMethods>(null!);
 
-  const addToSuggestions = useStore((state) => state.addToSuggestions);
-  const [searchValue, setSearchValue] = useState<string>("");
   const [headerHeight, setTopHeaderHeight] = useState<number>(0);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  const { searchName, setSearchName, items, status } = useGetFoodItems();
 
   const onFocusSearch = () => {
     setShowSuggestions(true);
   };
 
   const onCloseSuggestions = () => {
-    setSearchValue("");
     setShowSuggestions(false);
   };
 
   const onSelectFromSuggestions = (value: string) => {
-    setSearchValue(value);
-    setShowSuggestions(false);
-  };
-
-  const onSubmitEditing = () => {
-    if (searchValue.length) {
-      addToSuggestions(searchValue);
-    }
-    setShowSuggestions(false);
+    setSearchName(value);
+    onCloseSuggestions();
   };
 
   const onPressFilterButton = () => {
@@ -73,10 +63,10 @@ const Home = () => {
           <Header />
           <SearchSection
             inputProps={{
-              value: searchValue,
-              onChangeText: setSearchValue,
+              value: searchName,
+              onChangeText: setSearchName,
               onFocus: onFocusSearch,
-              onSubmitEditing: onSubmitEditing,
+              onSubmitEditing: onCloseSuggestions,
             }}
             onPressFilterButton={onPressFilterButton}
           />
@@ -84,19 +74,19 @@ const Home = () => {
         <ListHeader>Search results for ...</ListHeader>
         {Platform.OS === "ios" ? (
           <FlashList
-            data={DATA}
+            data={items}
             // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
             estimatedItemSize={200}
-            renderItem={({ item }) => <FoodItem item={item} />}
+            renderItem={({ item }: { item: Item }) => <FoodItem item={item} />}
           />
         ) : (
           <FlatList
             contentContainerStyle={listContainerStyle}
-            data={DATA}
+            data={items}
             // horizontal // Uncommenting flag will turn list into horizontally
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => <FoodItem item={item} />}
+            renderItem={({ item }: { item: Item }) => <FoodItem item={item} />}
           />
         )}
       </Container>

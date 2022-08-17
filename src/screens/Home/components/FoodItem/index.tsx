@@ -7,11 +7,12 @@ import Toast from "react-native-toast-message";
 import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
+import { Item as IFoodItem } from "~/generated/graphql";
 
-const FoodItem = ({ item }: { item: any }) => {
+const FoodItem = ({ item }: { item: IFoodItem }) => {
   const { width } = useWindowDimensions();
   const [favouriteCount, setFavouriteCount] = useState<number>(
-    item.favoriteCount
+    item?.favoriteCount || 0
   );
 
   const [assets] = useAssets([
@@ -52,10 +53,12 @@ const FoodItem = ({ item }: { item: any }) => {
     [width]
   );
 
+  const foodItemImage = useMemo(() => item?.photo || "", [item?.photo]);
+
   return (
     <Container style={[containerStyle]}>
       <TopSection>
-        <Image source={{ uri: item.photo }} />
+        <Image source={{ uri: foodItemImage }} />
         <FavouriteContainer>
           <FavouriteText>{favouriteCount}</FavouriteText>
           <FavouriteIcon Icon={HeartIcon} onPress={onAddToFavourite} />

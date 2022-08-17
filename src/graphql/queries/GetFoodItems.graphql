@@ -1,0 +1,24 @@
+query GetFoodItems(
+  $name: String
+  $priceGte: Int
+  $priceLte: Int
+  $isPublished: Boolean
+) {
+  items(
+    where: {
+      name: { startsWith: $name }
+      price: { gte: $priceGte, lte: $priceLte }
+      isPublished: { eq: $isPublished }
+    }
+  ) {
+    id
+    name
+    isPublished
+    price
+    favoriteCount
+    dietaryChoice
+    cuisineType
+    desc
+    photo
+  }
+}
