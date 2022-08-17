@@ -67,7 +67,6 @@ const FoodItem = ({ item }: { item: IFoodItem }) => {
         <DetailSection>
           <FoodDetailContainer>
             <PrimaryText>{item.name}</PrimaryText>
-            <SecondaryText>{`(${item.cuisineType})`}</SecondaryText>
           </FoodDetailContainer>
           <PaleoIcon source={{ uri: assets?.[0]?.uri || "" }} />
         </DetailSection>
@@ -76,9 +75,10 @@ const FoodItem = ({ item }: { item: IFoodItem }) => {
           <SecondaryText>749 kcal</SecondaryText>
         </DetailCenterSection>
         <Description>
-          Homemade beef cutlet with signature sauce with parmesan and mustard
-          will not leave you indifferent...
-          {/* {item.desc} */}
+          {/* Homemade beef cutlet with signature sauce with parmesan and mustard
+          will not leave you indifferent... */}
+          {item.desc}
+          <SecondaryText>{` • ${item.cuisineType} • ${item.dietaryChoice}`}</SecondaryText>
         </Description>
         <DetailSection>
           <PrimaryText>{`$${item.price} `}</PrimaryText>

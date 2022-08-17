@@ -85,6 +85,7 @@ const FilterBottomSheet = forwardRef<BottomSheetMethods, IFilterBottomSheet>(
             <LeftSideScrollView>
               {PARENT_FILTERS.map((p) => (
                 <FilterType
+                  key={p.id}
                   isActive={p.key === activeFilter}
                   filters={filters}
                   onPress={() => onSelectParentFilter(p.key)}
@@ -96,6 +97,7 @@ const FilterBottomSheet = forwardRef<BottomSheetMethods, IFilterBottomSheet>(
             <RightSideScrollView>
               {CHOICES_MAPPING[activeFilter].map((choice) => (
                 <ChoiceType
+                  key={choice.id}
                   activeFilter={activeFilter}
                   choice={choice}
                   filters={filters}
