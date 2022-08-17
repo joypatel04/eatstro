@@ -51,6 +51,10 @@ const Home = () => {
     bottomSheetRef?.current?.expand();
   };
 
+  const onCloseBottomSheet = () => {
+    bottomSheetRef?.current?.close();
+  };
+
   const listContainerStyle = useMemo(
     () => ({
       paddingBottom: headerHeight + 52, // Value 52 is header height
@@ -105,7 +109,10 @@ const Home = () => {
         />
       )}
       <Portal hostName="filterBottomSheet">
-        <FilterBottomSheet ref={bottomSheetRef} />
+        <FilterBottomSheet
+          ref={bottomSheetRef}
+          onCloseBottomSheet={onCloseBottomSheet}
+        />
       </Portal>
     </>
   );
