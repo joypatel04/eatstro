@@ -8,7 +8,7 @@ import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
 import { Item as IFoodItem } from "~/generated/graphql";
 
-const FoodItem = memo(({ item }: { item: IFoodItem }) => {
+const FoodItem = ({ item }: { item: IFoodItem }) => {
   const { width } = useWindowDimensions();
   const [favouriteCount, setFavouriteCount] = useState<number>(
     item?.favoriteCount || 0
@@ -90,9 +90,28 @@ const FoodItem = memo(({ item }: { item: IFoodItem }) => {
       </Section>
     </Container>
   );
-});
+};
 
-export default FoodItem;
+const areEqual = (
+  prevProps: Readonly<{ item: IFoodItem }>,
+  nextProps: Readonly<{ item: IFoodItem }>
+) => {
+  const {
+    item: { id },
+  } = nextProps;
+  const {
+    item: { id: prevId },
+  } = prevProps;
+
+  /*if the props are equal, it won't update, In our case id will never change so it won't update*/
+  const isSelectedEqual = id === prevId;
+
+  return isSelectedEqual;
+};
+
+const MemoizedFoodItem = memo(FoodItem, areEqual);
+
+export default MemoizedFoodItem;
 
 const Container = styled.Pressable`
   background-color: #fff;

@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import { View, FlatList, Platform } from "react-native";
+import { View, FlatList as List, Platform } from "react-native";
 import styled from "styled-components/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
@@ -15,6 +15,12 @@ import {
 import { useGetFoodItems } from "~/hooks/useGetFoodItems";
 import FoodItem from "./components/FoodItem";
 import EmptyList from "./components/EmptyList";
+import { Item } from "~/generated/graphql";
+
+const FlatList = Platform.OS === "ios" ? FlashList : List;
+interface IFoodListItem {
+  item: Item;
+}
 
 const Home = () => {
   // Note: I'd have used SafeAreaView instead but FlashList is not working with SafeAreaView
@@ -48,10 +54,12 @@ const Home = () => {
 
   const listContainerStyle = useMemo(
     () => ({
-      paddingBottom: headerHeight, // Value 52 is header height
+      paddingBottom: Platform.OS === "android" ? headerHeight + 52 : 0, // Value 52 is header height: ;
     }),
     []
   );
+
+  const renderItem = ({ item }: IFoodListItem) => <FoodItem item={item} />;
 
   return (
     <>
@@ -75,27 +83,19 @@ const Home = () => {
         <ListHeader>Search results for ...</ListHeader>
         {isFetching ? (
           <LoadingIndicator />
-        ) : Platform.OS === "ios" ? (
-          <FlashList
-            data={items}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            // horizontal // Uncommenting flag will turn list into horizontally
-            estimatedItemSize={200}
-            renderItem={({ item }) => <FoodItem item={item} />}
-            ListEmptyComponent={<EmptyList searchName={searchName} />}
-            keyExtractor={({ id }) => id?.toString() as string}
-          />
         ) : (
           <FlatList
             contentContainerStyle={listContainerStyle}
             data={items}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
+            {...(Platform.OS === "ios" && {
+              estimatedItemSize: 200,
+            })}
             // horizontal // Uncommenting flag will turn list into horizontally
-            renderItem={({ item }) => <FoodItem item={item} />}
+            renderItem={renderItem}
             ListEmptyComponent={<EmptyList searchName={searchName} />}
-            keyExtractor={({ id }) => id?.toString() as string}
+            keyExtractor={({ id }: Item) => id?.toString() as string}
           />
         )}
       </Container>
