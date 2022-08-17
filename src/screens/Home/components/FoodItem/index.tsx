@@ -1,32 +1,29 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, memo } from "react";
 import { useWindowDimensions } from "react-native";
 import { useAssets } from "expo-asset";
 import styled from "styled-components/native";
 import FastImage from "react-native-fast-image";
 import Toast from "react-native-toast-message";
-import { SvgUri } from "react-native-svg";
 import { Entypo } from "@expo/vector-icons";
 import { AnimatedPressable } from "~/components";
 import { Item as IFoodItem } from "~/generated/graphql";
 
-const FoodItem = ({ item }: { item: IFoodItem }) => {
+const FoodItem = memo(({ item }: { item: IFoodItem }) => {
   const { width } = useWindowDimensions();
   const [favouriteCount, setFavouriteCount] = useState<number>(
     item?.favoriteCount || 0
   );
 
   const [assets] = useAssets([
-    require("assets/paleo.svg"),
-    require("assets/calorie-fire.svg"),
-    require("assets/pepper-active.svg"),
-    require("assets/pepper-inactive.svg"),
-    require("assets/heart.svg"),
+    require("assets/paleo.webp"),
+    require("assets/calorie-fire.webp"),
+    require("assets/pepper-active.webp"),
+    require("assets/pepper-inactive.webp"),
+    require("assets/heart.webp"),
   ]);
 
   const AddIcon = <Entypo name="plus" size={24} color="white" />;
-  const HeartIcon = (
-    <SvgUri width={16} height={16} uri={assets?.[4]?.uri || ""} />
-  );
+  const HeartIcon = <Icon source={{ uri: assets?.[4]?.uri || "" }} />;
 
   const onAddToCart = useCallback(() => {
     // TO-DO: Figure out something on how to handle multiple add to cart, while a toast it already presented
@@ -71,10 +68,10 @@ const FoodItem = ({ item }: { item: IFoodItem }) => {
             <PrimaryText>{item.name}</PrimaryText>
             <SecondaryText>{`(${item.cuisineType})`}</SecondaryText>
           </FoodDetailContainer>
-          <SvgUri width={24} height={24} uri={assets?.[0]?.uri || ""} />
+          <PaleoIcon source={{ uri: assets?.[0]?.uri || "" }} />
         </DetailSection>
         <DetailCenterSection>
-          <SvgUri width={16} height={16} uri={assets?.[1]?.uri || ""} />
+          <Icon source={{ uri: assets?.[1]?.uri || "" }} />
           <SecondaryText>749 kcal</SecondaryText>
         </DetailCenterSection>
         <Description>
@@ -85,15 +82,15 @@ const FoodItem = ({ item }: { item: IFoodItem }) => {
         <DetailSection>
           <PrimaryText>{`$${item.price} `}</PrimaryText>
           <SpicyMeter>
-            <SvgUri width={16} height={16} uri={assets?.[2]?.uri || ""} />
-            <SvgUri width={16} height={16} uri={assets?.[3]?.uri || ""} />
-            <SvgUri width={16} height={16} uri={assets?.[3]?.uri || ""} />
+            <Icon source={{ uri: assets?.[2]?.uri || "" }} />
+            <Icon source={{ uri: assets?.[3]?.uri || "" }} />
+            <Icon source={{ uri: assets?.[3]?.uri || "" }} />
           </SpicyMeter>
         </DetailSection>
       </Section>
     </Container>
   );
-};
+});
 
 export default FoodItem;
 
@@ -205,4 +202,14 @@ const SpicyMeter = styled.View`
   justify-content: space-between;
   align-items: flex-end;
   width: 56px;
+`;
+
+const Icon = styled(FastImage)`
+  width: 16px;
+  height: 16px;
+`;
+
+const PaleoIcon = styled(FastImage)`
+  width: 24px;
+  height: 24px;
 `;
