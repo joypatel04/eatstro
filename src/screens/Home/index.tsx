@@ -144,7 +144,7 @@ const ListHeader = styled.Text`
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
 `;
 
 export default Home;

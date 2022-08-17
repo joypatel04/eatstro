@@ -2,11 +2,13 @@ import { Feather } from "@expo/vector-icons";
 import { TextInput, TextInputProps } from "react-native";
 import styled from "styled-components/native";
 
+import { defaultTheme } from "~/utils/theme";
+
 const Input = (props: TextInputProps) => (
   <Container>
-    <Feather name="search" size={24} color="#D1D1D1" />
+    <Feather name="search" size={24} color={defaultTheme.COLORS.ICON_COLOR} />
     <CustomInput
-      placeholderTextColor="#222B32"
+      placeholderTextColor={defaultTheme.COLORS.TITLE_COLOR}
       placeholder="Search something..."
       maxLength={28}
       returnKeyType="search"
@@ -20,7 +22,7 @@ const Container = styled.View`
   height: 56px;
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS["WHITE"]};
   padding: 12px;
   border-radius: 16px;
   overflow: hidden;

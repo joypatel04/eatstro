@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import { useStore } from "~/store";
 import { ISearchSuggestionsProps } from "~/types";
+import { defaultTheme } from "~/utils/theme";
 
 const SearchSuggestions = ({
   headerHeight,
@@ -53,7 +54,11 @@ const SearchSuggestions = ({
             <Suggestion>{item}</Suggestion>
           </SuggestionButton>
           <Pressable onPress={() => removeFromSuggestions(item)}>
-            <Ionicons name="close" size={24} color="#222b32" />
+            <Ionicons
+              name="close"
+              size={24}
+              color={defaultTheme.COLORS.TITLE_COLOR}
+            />
           </Pressable>
         </SuggestionView>
       )}
@@ -83,7 +88,7 @@ const SuggestionButton = styled(Pressable)`
 `;
 
 const Suggestion = styled(Text)`
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-size: 18px;
   line-height: 24px;
   font-weight: 500;
@@ -99,7 +104,7 @@ const ClearAllContainer = styled.View`
 `;
 
 const ButtonText = styled.Text`
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-size: 16px;
   line-height: 22px;
   font-weight: 600;

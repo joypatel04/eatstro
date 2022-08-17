@@ -16,6 +16,7 @@ import {
   ICost,
   IFilterBottomSheetProps,
 } from "~/types";
+import { defaultTheme } from "~/utils/theme";
 
 const FilterBottomSheet = forwardRef<
   BottomSheetMethods,
@@ -75,7 +76,11 @@ const FilterBottomSheet = forwardRef<
         <HeaderContainer>
           <HeaderTitle>Filter</HeaderTitle>
           <CloseIcon onPress={onCloseBottomSheet}>
-            <Ionicons name="close-circle" size={32} color="#D1D1D1" />
+            <Ionicons
+              name="close-circle"
+              size={32}
+              color={defaultTheme.COLORS.ICON_COLOR}
+            />
           </CloseIcon>
         </HeaderContainer>
         <CenterContainer>
@@ -128,13 +133,13 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   border-bottom-width: 1.5px;
-  border-color: #d1d1d17e;
+  border-color: ${(props) => props.theme.COLORS["BORDER_COLOR"]};
 `;
 
 const HeaderTitle = styled.Text`
   font-size: 24px;
   line-height: 30px;
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-weight: 700;
 `;
 
@@ -158,13 +163,13 @@ const FooterContainer = styled.View`
   justify-content: space-around;
   margin-top: 5px;
   border-top-width: 1.5px;
-  border-color: #d1d1d17e;
+  border-color: ${(props) => props.theme.COLORS["BORDER_COLOR"]};
 `;
 
 const ClearButton = styled(TouchableOpacity)`
   width: 30%;
   height: 50px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS["WHITE"]};
   justify-content: center;
   align-items: center;
 `;
@@ -172,14 +177,14 @@ const ClearButton = styled(TouchableOpacity)`
 const ClearTitle = styled.Text`
   font-size: 18px;
   line-height: 22px;
-  color: #f16b59;
+  color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   font-weight: 500;
 `;
 
 const ApplyButton = styled(Pressable)`
   width: 50%;
   height: 50px;
-  background-color: #f16b59;
+  background-color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   border-radius: 12px;
   justify-content: center;
   align-items: center;
@@ -188,7 +193,7 @@ const ApplyButton = styled(Pressable)`
 const ApplyTitle = styled.Text`
   font-size: 18px;
   line-height: 22px;
-  color: #fff;
+  color: ${(props) => props.theme.COLORS["WHITE"]};
   font-weight: 600;
 `;
 
@@ -196,7 +201,7 @@ const LeftSideScrollView = styled(ScrollView)`
   flex: 0.4;
   margin-top: 5px;
   border-right-width: 1.5px;
-  border-color: #d1d1d17e;
+  border-color: ${(props) => props.theme.COLORS["BORDER_COLOR"]};
 `;
 
 const RightSideScrollView = styled(ScrollView)`

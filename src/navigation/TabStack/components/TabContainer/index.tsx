@@ -78,5 +78,5 @@ export default TabContainer;
 
 const BottomSpace = styled.View`
   height: 15px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS["WHITE"]};
 `;

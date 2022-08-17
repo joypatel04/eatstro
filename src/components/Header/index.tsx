@@ -10,7 +10,7 @@ const Header = () => (
 export default Header;
 
 const HeaderTitle = styled.Text`
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-size: 32px;
   line-height: 40px;
   font-weight: 400;
@@ -19,7 +19,7 @@ const HeaderTitle = styled.Text`
 `;
 
 const HeaderSubTitle = styled.Text`
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-size: 16px;
   line-height: 24px;
   opacity: 0.5;

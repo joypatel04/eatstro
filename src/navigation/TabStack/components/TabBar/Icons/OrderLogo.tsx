@@ -1,6 +1,7 @@
 import Svg, { Path } from "react-native-svg";
 
 import { SvgLogoProps } from "~/types";
+import { defaultTheme } from "~/utils/theme";
 
 const OrderLogo = ({ color, width, height }: SvgLogoProps) => (
   <Svg
@@ -21,21 +22,21 @@ const OrderLogo = ({ color, width, height }: SvgLogoProps) => (
     />
     <Path
       d="M15.7157 16.2234H8.49572"
-      stroke="#FFFEFE"
+      stroke={defaultTheme.COLORS.WHITE}
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <Path
       d="M15.7157 12.0369H8.49572"
-      stroke="#FFFEFE"
+      stroke={defaultTheme.COLORS.WHITE}
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <Path
       d="M11.2517 7.86014H8.4967"
-      stroke="#FFFEFE"
+      stroke={defaultTheme.COLORS.WHITE}
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"

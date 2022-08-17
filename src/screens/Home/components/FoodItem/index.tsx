@@ -115,7 +115,7 @@ const MemoizedFoodItem = memo(FoodItem, areEqual);
 export default MemoizedFoodItem;
 
 const Container = styled.Pressable`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.COLORS["WHITE"]};
   height: 280px;
   border-radius: 16px;
   margin-bottom: 12px;
@@ -144,7 +144,7 @@ const FavouriteContainer = styled.View`
 const FavouriteText = styled.Text`
   font-size: 12px;
   line-height: 15px;
-  color: #fff;
+  color: ${(props) => props.theme.COLORS["WHITE"]};
   font-weight: 700;
   margin-right: 8px;
 `;
@@ -161,7 +161,7 @@ const FavouriteIcon = styled(AnimatedPressable)`
 const AddButton = styled(AnimatedPressable)`
   width: 40px;
   height: 40px;
-  background-color: #f16b59;
+  background-color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -190,7 +190,7 @@ const FoodDetailContainer = styled.View`
 const PrimaryText = styled.Text`
   font-size: 16px;
   line-height: 24px;
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   font-weight: 700;
 `;
 
@@ -198,7 +198,7 @@ const Description = styled.Text`
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
 `;
 
 const DetailCenterSection = styled.View`
@@ -213,7 +213,7 @@ const SecondaryText = styled.Text`
   line-height: 16px;
   font-weight: 500;
   opacity: 0.5;
-  color: #222b32;
+  color: ${(props) => props.theme.COLORS["TITLE_COLOR"]};
   margin-left: 6.75px;
 `;
 

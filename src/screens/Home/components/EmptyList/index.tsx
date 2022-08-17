@@ -18,7 +18,7 @@ const Container = styled.View`
 const SubTitle = styled.Text`
   font-size: 16px;
   font-weight: 500;
-  color: #f16b59;
+  color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   margin-top: 20px;
 `;
 

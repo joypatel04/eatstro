@@ -7,6 +7,7 @@ import AnimatedPressable from "../AnimatedPressable";
 import Input from "../Input";
 
 import { ISearchSectionProps } from "~/types";
+import { defaultTheme } from "~/utils/theme";
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -19,7 +20,13 @@ const SearchSection = ({
     onPressFilterButton();
   };
 
-  const Icon = <Ionicons name="ios-options-outline" size={24} color="#fff" />;
+  const Icon = (
+    <Ionicons
+      name="ios-options-outline"
+      size={24}
+      color={defaultTheme.COLORS.WHITE}
+    />
+  );
 
   return (
     <View style={{ marginBottom: 10 }}>
@@ -58,7 +65,7 @@ const FilterButton = styled(AnimatedPressable)`
   width: 52px;
   height: 52px;
   border-radius: 26px;
-  background-color: #f16b59;
+  background-color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   justify-content: center;
   align-items: center;
   margin-left: 12px;

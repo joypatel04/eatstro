@@ -13,15 +13,8 @@ const ChoiceType = ({
     activeFilter && filters?.[activeFilter]?.displayText === choice.displayText;
   return (
     <Container onPress={onPress}>
-      <RadioButton
-        style={{
-          borderWidth: 1,
-          borderColor: isSelected ? "#f16b59" : "#d1d1d1",
-        }}
-      >
-        <RadioButtonFill
-          style={{ backgroundColor: isSelected ? "#f16b59" : "#fff" }}
-        />
+      <RadioButton isSelected={isSelected}>
+        <RadioButtonFill isSelected={isSelected} />
       </RadioButton>
       <FilterText>{choice.displayText}</FilterText>
     </Container>
@@ -42,20 +35,28 @@ const FilterText = styled(Text)`
   font-size: 16px;
 `;
 
-const RadioButton = styled(View)`
+const RadioButton = styled(View)<{ isSelected: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 10px;
   background-color: white;
   justify-content: center;
   align-items: center;
+  border-width: 1px;
+  border-color: ${(props) =>
+    props.isSelected
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["ICON_COLOR"]}; ;
 `;
 
-const RadioButtonFill = styled(View)`
+const RadioButtonFill = styled(View)<{ isSelected: boolean }>`
   width: 10px;
   height: 10px;
   border-radius: 5px;
-  background-color: white;
+  background-color: ${(props) =>
+    props.isSelected
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["WHITE"]};
 `;
 
 export default ChoiceType;

@@ -11,51 +11,55 @@ const FilterType = ({
   filterKey,
 }: IFilterTypeProps) => {
   return (
-    <Container
-      style={{ borderColor: isActive ? "#f16b59" : "#FFF" }}
-      onPress={onPress}
-    >
-      <View
-        style={{
-          backgroundColor: isActive ? "#f16b59" : "#FFF",
-          width: 5,
-          height: "100%",
-          borderTopRightRadius: 20,
-          borderBottomRightRadius: 20,
-        }}
-      />
-      <AppliedFilterDot color={filters?.[filterKey] ? "#f16b59" : "#fff"} />
-
-      <FilterText
-        style={{
-          color: isActive ? "#f16b59" : "#222b32",
-        }}
-      >
-        {type}
-      </FilterText>
+    <Container isActive={isActive} onPress={onPress}>
+      <BorderIndicatorView isActive={isActive} />
+      <AppliedFilterDot isActive={Boolean(filters?.[filterKey])} />
+      <FilterText isActive={isActive}>{type}</FilterText>
     </Container>
   );
 };
 
-const Container = styled(TouchableOpacity)`
+const Container = styled(TouchableOpacity)<{ isActive: boolean }>`
   height: 50px;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  border-color: ${(props) =>
+    props.isActive
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["WHITE"]};
 `;
 
-const AppliedFilterDot = styled(View)`
+const BorderIndicatorView = styled(View)<{ isActive: boolean }>`
+  width: 5px;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: ${(props) =>
+    props.isActive
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["WHITE"]};
+`;
+
+const AppliedFilterDot = styled(View)<{ isActive: boolean }>`
   width: 8px;
   height: 8px;
   border-radius: 4px;
   margin-left: 5px;
-  background-color: ${(props: { color: string }) => props.color};
+  background-color: ${(props) =>
+    props.isActive
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["WHITE"]};
 `;
 
-const FilterText = styled(Text)`
+const FilterText = styled(Text)<{ isActive: boolean }>`
   margin-left: 10px;
   font-weight: 500;
   font-size: 16px;
+  color: ${(props) =>
+    props.isActive
+      ? props.theme.COLORS["PRIMARY_COLOR"]
+      : props.theme.COLORS["TITLE_COLOR"]};
 `;
 
 export default FilterType;

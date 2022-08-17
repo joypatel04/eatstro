@@ -12,6 +12,7 @@ import OrderLogo from "./Icons/OrderLogo";
 import { AnimatedPressable } from "~/components";
 import { NAVIGATION_BOTTOM_TABS_HEIGHT } from "~/constants";
 import { DotIconProps } from "~/types";
+import { defaultTheme } from "~/utils/theme";
 
 const TabBar = ({ state, navigation }: BottomTabBarProps) => {
   const onPress = (name: string) => {
@@ -27,7 +28,11 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           <HomeLogo
             width={24}
             height={24}
-            color={state.index === 0 ? "#F16B59" : "#D1D1D1"}
+            color={
+              state.index === 0
+                ? defaultTheme.COLORS.PRIMARY_COLOR
+                : defaultTheme.COLORS.ICON_COLOR
+            }
           />
         );
       case "Favourite":
@@ -35,7 +40,11 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           <FavouriteLogo
             width={24}
             height={24}
-            color={state.index === 1 ? "#F16B59" : "#D1D1D1"}
+            color={
+              state.index === 1
+                ? defaultTheme.COLORS.PRIMARY_COLOR
+                : defaultTheme.COLORS.ICON_COLOR
+            }
           />
         );
       case "Orders":
@@ -43,11 +52,17 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           <OrderLogo
             width={24}
             height={24}
-            color={state.index === 3 ? "#F16B59" : "#D1D1D1"}
+            color={
+              state.index === 3
+                ? defaultTheme.COLORS.PRIMARY_COLOR
+                : defaultTheme.COLORS.ICON_COLOR
+            }
           />
         );
       case "Cart":
-        return <CartLogo width={24} height={24} color="#FFF" />;
+        return (
+          <CartLogo width={24} height={24} color={defaultTheme.COLORS.WHITE} />
+        );
       case "Profile":
         return <ProfileIcon size={24} source={{ uri: assets?.[0].uri }} />;
       default:
@@ -74,10 +89,18 @@ const TabBar = ({ state, navigation }: BottomTabBarProps) => {
           <TabButton key={name} onPress={() => onPress(name)}>
             <Tab>
               <Logo />
-              <Title color={state.index === index ? "#F16B59" : "#D1D1D1"}>
+              <Title
+                color={
+                  state.index === index
+                    ? defaultTheme.COLORS.PRIMARY_COLOR
+                    : defaultTheme.COLORS.ICON_COLOR
+                }
+              >
                 {name}
               </Title>
-              {state.index === index && <DotIcon size={6} color="#F16B59" />}
+              {state.index === index && (
+                <DotIcon size={6} color={defaultTheme.COLORS.PRIMARY_COLOR} />
+              )}
             </Tab>
           </TabButton>
         );
@@ -149,7 +172,7 @@ const CartButton = styled(AnimatedPressable)`
   width: 72px;
   height: 72px;
   border-radius: 36px;
-  background-color: #f16b59;
+  background-color: ${(props) => props.theme.COLORS["PRIMARY_COLOR"]};
   justify-content: center;
   align-items: center;
   bottom: 40px;
