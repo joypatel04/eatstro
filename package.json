@@ -12,6 +12,11 @@
     "lint-and-fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "prettier-format": "prettier --config .prettierrc '**/*.{json,js,jsx,ts,tsx}' --write"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn prettier-format && yarn lint-and-fix"
+    }
+  },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.3",
     "@gorhom/portal": "^1.0.14",
@@ -60,6 +65,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^8.22.0",
     "eslint-config-universe": "^11.1.0",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "typescript": "~4.7.4"
   },
