@@ -12,6 +12,11 @@
     "lint-and-fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "prettier-format": "prettier --config .prettierrc '**/*.{json,js,jsx,ts,tsx}' --write"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn prettier-format && yarn lint-and-fix"
+    }
+  },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.3",
     "@gorhom/portal": "^1.0.14",
