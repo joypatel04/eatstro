@@ -4,7 +4,7 @@
 <p align="center">
 
 </p>
-<h1 align="center">Eatsro</h1>
+<h1 align="center">Eatstro</h1>
 <div align="center">
     <div>
         <img src="https://img.shields.io/badge/React%20Native-v0.68.2-blue" />
